@@ -6,7 +6,7 @@ public class Input_data {
 
         System.out.print("Digite o seu nome: ");
         String nome = input.nextLine();
-
+        
         System.out.print("\nDigite sua nota: ");
         float nota = input.nextFloat();
         
@@ -16,4 +16,5 @@ public class Input_data {
     }
 
     // Para colocar acento, mudar o UTF-8 que fica na parte inferior direita do Vs Code
+
 }
