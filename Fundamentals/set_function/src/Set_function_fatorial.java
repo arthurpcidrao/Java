@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Set_function {
+public class Set_function_fatorial {
 
     // Criação de função fica fora da função principal (main)
     public static int fatorial(int n){
