@@ -26,6 +26,5 @@ public class Set_function_fatorial {
         //double termo = Math.pow(4,6);
         //para números float, usar sempre Double
 
-        
     }
 }

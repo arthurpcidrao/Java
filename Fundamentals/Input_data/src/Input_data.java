@@ -8,7 +8,7 @@ public class Input_data {
         String nome = input.nextLine();
         
         System.out.print("\nDigite sua nota: ");
-        float nota = input.nextFloat();
+        Double nota = input.nextDouble();
         
         input.close();
 
