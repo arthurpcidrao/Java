@@ -3,24 +3,25 @@ import java.util.Scanner;
 public class Set_function_fatorial {
 
     // Criação de função fica fora da função principal (main)
-    public static int fatorial(int n){
-        int fator = 1;
+    public static long fatorial(long n){
+        long fator = 1;
         for (int i = 1; i <= n; i++) {
             fator = i*fator;
         }
         return fator;
     }
 
+    // Função principal (início da leitura)
     public static void main(String[] args) throws Exception {
 
         Scanner input = new Scanner(System.in);
 
         System.out.print("Digite um número e receba seu fatorial: ");
-        int fat = input.nextInt();
+        long fat = input.nextInt();
 
         input.close();
 
-        int resp;
+        long resp;
         resp = fatorial(fat);
         System.out.format("O fatorial de %d eh %d!", fat, resp);
         //double termo = Math.pow(4,6);
