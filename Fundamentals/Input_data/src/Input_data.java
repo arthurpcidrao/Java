@@ -12,7 +12,7 @@ public class Input_data {
         
         input.close();
 
-        System.out.format("A nota de %s eh %.4f", nome, nota);
+        System.out.printf("A nota de %s eh %.4f", nome, nota);
     }
 
     // Para colocar acento, mudar o UTF-8 que fica na parte inferior direita do Vs Code

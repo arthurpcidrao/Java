@@ -16,14 +16,14 @@ public class Set_function_fatorial {
 
         Scanner input = new Scanner(System.in);
 
-        System.out.print("Digite um número e receba seu fatorial: ");
+        System.out.printf("Digite um número e receba seu fatorial: ");
         long fat = input.nextInt();
 
         input.close();
 
         long resp;
         resp = fatorial(fat);
-        System.out.format("O fatorial de %d eh %d!", fat, resp); // ou System.out.printf()
+        System.out.printf("O fatorial de %d eh %d!", fat, resp); // ou System.out.format()
         //double termo = Math.pow(4,6);
         //para números float, usar sempre Double
 

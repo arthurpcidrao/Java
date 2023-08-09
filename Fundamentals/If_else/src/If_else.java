@@ -11,10 +11,10 @@ public class If_else {
         var.close();
 
         if ((x >= 0) && (x <= 50)) {
-            System.out.format("O x (%d) esta entre 0 e 50", x);
+            System.out.printf("O x (%d) esta entre 0 e 50", x);
         }
         else {
-            System.out.format("O x (%d) esta entre 51 e 100", x);
+            System.out.printf("O x (%d) esta entre 51 e 100", x);
         }
 
     }
