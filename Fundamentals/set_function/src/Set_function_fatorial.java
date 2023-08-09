@@ -24,6 +24,7 @@ public class Set_function_fatorial {
         resp = fatorial(fat);
         System.out.format("O fatorial de %d eh %d!", fat, resp);
         //double termo = Math.pow(4,6);
+        //para números float, usar sempre Double
 
         
     }
