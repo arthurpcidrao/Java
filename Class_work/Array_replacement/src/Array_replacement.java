@@ -18,5 +18,8 @@ public class Array_replacement {
 
             System.out.printf("X[%d] = %d\n", i, x[i]);
         }
+
+        input.close();
+
     }
 }
