@@ -3,17 +3,24 @@ import java.util.Scanner;
 public class Example_OOP {
     public static void main(String[] args) throws Exception {
         // Criando um objeto
-        Headphone ArthurPhone;
-        ArthurPhone = new Headphone();
+        Headphone arthurPhone = new Headphone();
+
+        Scanner input = new Scanner(System.in); // entrada de dados pode ser referido ao objeto TECLADO do pc
 
         // Chamando os atributos (variáveis)
-        ArthurPhone.marca = "Sony";
-        ArthurPhone.cor = "Preto";
+        arthurPhone.setMarca("Sony");  // forma PRIVADA
+        arthurPhone.setTamanho('P');  // forma PRIVADA
+        
+        System.out.println(arthurPhone.getMarca());  // forma PRIVADA
+        System.out.println(arthurPhone.getTamanho());  // forma PRIVADA
+
+        arthurPhone.cor = "Preto";  // forma PÚBLICA
+        arthurPhone.material = "aluminio";  // forma PÚBLICA
 
         // Chamando os métodos (funções)
-        ArthurPhone.on();
-        ArthurPhone.AumentarVolume();
-        ArthurPhone.AumentarVolume();
+        arthurPhone.on();
+        arthurPhone.AumentarVolume();
+        arthurPhone.AumentarVolume();
         
     }
 }

@@ -1,29 +1,53 @@
 public class Headphone {
-    String marca;
-    String cor;
-    String material;
-    char tamanho;
-    boolean bluetooth;
-    boolean ligado;
-    int volume = 0;
+    
+    // Atributos
+    private String marca;   // (encapsulamento)
+    public String cor;
+    public String material;
+    public char tamanho;
+    public boolean bluetooth;
+    public boolean ligado;
+    public int volume = 0;
 
-    void on() {
+    //---------------------------------------//
+
+    // Métodos
+
+    public void setMarca( String marca) {
+        this.marca = marca;  // forma convencional
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void on() {
         ligado = true;
     }
 
-    void off() {
+    public void off() {
         ligado = false;
     }
 
-    void AumentarVolume() {
-        if (ligado == true) {
-            volume++;
+    public void AumentarVolume() {
+        if (this.ligado == true) {
+            this.volume++;
         }
     }
 
-    void DiminuirVolume() {
-        if (ligado == true) {
-            volume--;
+    public void DiminuirVolume() {
+        if (this.ligado == true) {
+            this.volume--;
         }
     }
+
+    public void setTamanho(char t) {
+        tamanho = t;
+    }
+
+    public char getTamanho() {
+        return tamanho;
+    }
+
+    //-------------------------------------//
 }
