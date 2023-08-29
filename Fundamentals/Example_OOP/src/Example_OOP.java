@@ -21,6 +21,7 @@ public class Example_OOP {
         arthurPhone.on();
         arthurPhone.AumentarVolume();
         arthurPhone.AumentarVolume();
+        input.close();
         
     }
 }

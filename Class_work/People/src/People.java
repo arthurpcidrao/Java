@@ -15,11 +15,11 @@ public class People {
         // os dados que você quer que ele inicie.
     }
 
-    public void setName (String name){
+    public void setName (String name){ // altera um atributo
         this.name = name;
     }    
 
-    public String getName() {
+    public String getName() { // traz um atributo
         return name;
     }
 
