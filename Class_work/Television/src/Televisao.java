@@ -4,6 +4,15 @@ public class Televisao {
     private int volume;
 
 
+    public int getChannel() {
+        return channel;
+    }
+
+    public void setChannel(int channel){
+        this.channel = channel;
+    }
+
+    // REVISAR ESSA PARTE DO CÓDIGO
     public boolean setTvOn(){
         if (this.tvOn == false){
             this.tvOn = true;

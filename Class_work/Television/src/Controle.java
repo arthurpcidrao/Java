@@ -1,10 +1,10 @@
-import java.util.Scanner;
-
 public class Controle {
     private Televisao tv;
-    private int keyboard;
 
 
+    public Controle(Televisao tv){
+        this.tv = tv;
+    }
 
     public void tvOn(){
         tv.setTvOn();
@@ -26,10 +26,10 @@ public class Controle {
         tv.channelDown();
     }
 
-    public void setKeyboard(){
-        Scanner input = new Scanner(System.in);
-        input.close();
+    public void changeChannel ( int channel){
+        tv.setChannel(channel);
     }
+
 
 
 }
