@@ -1,11 +1,11 @@
-public class Lanchonete {
+public class NotaFiscal {
     // atributos
-    private int lanche;
+    private Lanche lanche;
     private int qtd;
     
     // métodos
 
-    public Lanchonete(int lanche, int qtd){
+    public NotaFiscal(int lanche, int qtd){
         this.lanche = lanche;
         this.qtd = qtd;
     }

@@ -10,9 +10,9 @@ public class Main {
 
         input.close();
 
-        Lanchonete lan = new Lanchonete(codigo, quantidade);
+        NotaFiscal lanchonete = new NotaFiscal(codigo, quantidade);
 
-        double total = lan.valorFinal();
+        double total = lanchonete.valorFinal();
 
         System.out.printf("Total: R$ %.2f\n", total);
 
