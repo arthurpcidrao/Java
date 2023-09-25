@@ -1,26 +1,25 @@
 public class Laundry {
-    private int min;
-    private int max;
+    private int num;
+    private Washer w;
+    private Dryer d;
 
-    public int getMin(){
-        return min;
+    public Laundry (Washer w, Dryer d){
+        this.w = w;
+        this.d = d;
     }
 
-    public void setMin(int min){
-        this.min = min;
+    public int getNum(){
+        return num;
     }
 
-    public int getMax(){
-        return max;
+    public void setNum(int num){
+        this.num = num;
     }
 
-    public void setMax(int max){
-        this.max = max;
-    }
-
-    public String ehPossivel(boolean W, boolean D) {
+    public String ehPossivel(){
         String result = "impossivel";
-        if (W && D){
+
+        if (w.calculaMaquina(this.num) && d.calculaMaquina(this.num)){
             result = "possivel";
         }
         return result;

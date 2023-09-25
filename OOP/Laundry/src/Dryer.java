@@ -1,6 +1,8 @@
-public class Dryer extends Laundry{
+public class Dryer extends Machines{
 
-    public boolean calcDry(int num){
+    @Override
+    public boolean calculaMaquina(int num){
+        
         boolean resultD = true;
         if ((num < this.getMin()) || (num > this.getMax())){
             resultD = false;

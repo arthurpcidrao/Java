@@ -1,6 +1,7 @@
-public class Washer extends Laundry{
+public class Washer extends Machines{
 
-    public boolean calcWash(int num){
+    @Override
+    public boolean calculaMaquina(int num){
 
         boolean resultW = true;
         if ((num < this.getMin()) || (num > this.getMax())){
