@@ -1,17 +1,8 @@
 import java.util.ArrayList;
 
 public class Pipes {
-    private ArrayList <Integer> pipes = new ArrayList();
-    private int pipe;
+    private ArrayList<Integer> pipes = new ArrayList<Integer>();
     private int qtde;
-
-    public int getPipe(){
-        return pipe;
-    }
-
-    public void setPipe(int pipe){
-        this.pipe = pipe;
-    }
 
     public int getQtde(){
         return qtde;
@@ -25,7 +16,7 @@ public class Pipes {
         pipes.add(pipe);
     }
 
-    public int whichPipe(int index){
+    public int getPipe(int index){
         return pipes.get(index);
     }
 

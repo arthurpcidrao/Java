@@ -1,10 +1,11 @@
 import java.util.Scanner;
 
-public class Main {
+public class FrogGame {
     public static void main(String[] args) throws Exception {
         Scanner input = new Scanner(System.in);
         Pipes canos = new Pipes();
-        Frog sapo = new Frog(canos);
+        Frog sapo = new Frog();
+        Game jogo = new Game(sapo, canos);
 
         sapo.setJump(input.nextInt());
         canos.setQtde(input.nextInt());
@@ -13,7 +14,7 @@ public class Main {
             canos.addPipe(input.nextInt());
         }
 
-        System.out.println(sapo.isPossible());
+        System.out.println(jogo.isPossible());
 
         input.close();
         
