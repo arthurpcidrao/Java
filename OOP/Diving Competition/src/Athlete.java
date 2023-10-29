@@ -1,10 +1,14 @@
-import java.util.ArrayList;
-
 public class Athlete {
     private String name;
     private double diffic;
+    private double nota;    
 
-    public String getNome(){
+    public Athlete(String name, double nota){
+        this.name = name;
+        this.nota = nota;
+    }
+
+    public String getName(){
         return name;
     }
 
@@ -19,4 +23,17 @@ public class Athlete {
     public void setDiffic(double diffic){
         this.diffic = diffic;
     }
+
+    public double getNota(){
+        return nota;
+    }
+
+    public void setNota(double nota){
+        this.nota = nota;
+    }
+
+    public void imprimeDados(){
+        System.out.printf("%s %.2f\n", getName(), getNota());
+    }
+
 }

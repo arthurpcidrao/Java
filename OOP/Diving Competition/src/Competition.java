@@ -1,19 +1,16 @@
-import java.util.Scanner;
+import java.util.ArrayList;
 
 public class Competition {
-    public static void main(String[] args) throws Exception {
-        
-        Scanner input = new Scanner(System.in);
+    private ArrayList<Athlete> atletas = new ArrayList<Athlete> ();
 
-        Athlete competidor = new Athlete();
-        Judge jurado = new Judge();
-        Rules regras = new Rules(competidor, jurado);
+    public void armazenaAtleta(String nome, double dificuldade, double media){
+        Athlete competidor = new Athlete(nome, dificuldade*media);
+          atletas.add(competidor);
+    }
 
-        int qtde = input.nextInt();
-        
-
-
-
-        input.close();
+    public void print(){
+        for (Athlete x : atletas){
+            x.imprimeDados();
+        }
     }
 }
