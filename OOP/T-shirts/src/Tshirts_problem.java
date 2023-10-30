@@ -12,7 +12,7 @@ public class Tshirts_problem {
             if(num == 0){
                 break;
             }
-          
+
             input.nextLine();
 
             Pedidos pedidos = new Pedidos();

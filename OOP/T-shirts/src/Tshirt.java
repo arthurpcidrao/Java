@@ -45,6 +45,5 @@ public class Tshirt implements Comparable<Tshirt>{
             return compTam;
         }
         return compCor;
-    }
-    
+    }    
 }

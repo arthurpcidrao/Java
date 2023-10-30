@@ -22,5 +22,4 @@ public class Pedidos {
             t.printCamisa();
         }
     }
-
 }
