@@ -5,7 +5,7 @@ import javax.swing.JPanel;  // criação de pinturas
 
 public class ScreenAnimation extends JFrame {
     private JPanel tela;
-    private int fps = 1000/20;  // 1000 milissegundos, 20 movimentações (em 1 segundo, movimentar 20 vezes)
+    private int fps = 1000/60;  // 1000 milissegundos, 20 movimentações (em 1 segundo, movimentar 20 vezes)
     private int count;
     private boolean anima = true;
     
