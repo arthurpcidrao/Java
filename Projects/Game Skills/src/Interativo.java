@@ -9,69 +9,101 @@ public class Interativo extends JFrame {
     private int px;
     private int py;
     private boolean jogando = true;
+    private boolean controleTecla[] = new boolean[4];
 
     private final int FPS = 1000/20;
 
     public Interativo(){
-        super.addKeyListener(new KeyListener() {
+        this.addKeyListener(new KeyListener() {
             
-            @Override
-            //evento para tecla apertada
-            public void keyTyped(keyEvent e){
+            @Override //evento para tecla apertada
+            public void keyTyped(KeyEvent e){
             }
 
-            @Override
-            //evento para tecla liberada
-            public void keyReleased(keyEvent e){
+            @Override //evento para tecla liberada
+            public void keyReleased(KeyEvent e){
+                setaTecla(e.getKeyCode(), false);
             }
 
             @Override
             //evento para tecla pressionada
             public void keyPressed(KeyEvent e){
-                int tecla = e.getKeyCode();
-                switch (tecla) {
-                    case KeyEvent.VK_ESCAPE://tecla ESC
-                        jogando = false;
-                        dispose(); //para fechar a janela
-                        break;
-                    case KeyEvent.VK_UP:
-                        py--;
-                        break;
-                    case KeyEvent.VK_DOWN:
-                        py++;
-                        break;
-                    case KeyEvent.VK_LEFT:
-                        px--;
-                        break;
-                    case KeyEvent.VK_RIGHT:
-                        px++;
-                        break;
-                }
+                setaTecla(e.getKeyCode(), true);
             }
-            //abaixo tem sugestão do JAVA para um erro que apareceu
-            @Override
-            public void keyTyped(KeyEvent e) {
-                // TODO Auto-generated method stub
-                throw new UnsupportedOperationException("Unimplemented method 'keyTyped'");
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-                // TODO Auto-generated method stub
-                throw new UnsupportedOperationException("Unimplemented method 'keyReleased'");
-            }
+            
         });
+
+        tela = new JPanel(){
+            @Override
+            public void paintComponent(Graphics g){
+                g.setColor(Color.WHITE);
+                g.fillRect(0, 0, tela.getWidth(), tela.getHeight());
+
+                int x = tela.getWidth()/2 - 20 + px;
+                int y = tela.getHeight()/2 - 20 + py;
+
+                g.setColor(Color.BLUE);
+                g.fillRect(x, y, 40, 40);
+                g.drawString("Agora eu estou em " + x + "x" + y, 5, 10);
+            }
+        };
+        getContentPane().add(tela);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(640, 480);
+        setVisible(true);
     }
 
     public void inicia(){
         long proxAtualizacao = 0;
         while(jogando){
             if (System.currentTimeMillis() >= proxAtualizacao){
+                atualizaJogo();
                 tela.repaint();
                 proxAtualizacao = System.currentTimeMillis() + FPS;
             }
         }
     }
 
-    //ainda tem mais código...
+    public void atualizaJogo(){
+        if (controleTecla[0]){
+            py--;
+        }
+        else if (controleTecla[1]){
+            py++;
+        }
+
+        if (controleTecla[2]){
+            px--;
+        }
+        else if (controleTecla[3]){
+            px++;
+        }
+    }
+
+    private void setaTecla(int tecla, boolean pressionada){
+        switch(tecla){
+            case KeyEvent.VK_ESCAPE: // tecla ESC
+            jogando = false;
+            dispose();
+            break;
+
+            case KeyEvent.VK_UP:
+            controleTecla[0] = pressionada;
+            break;
+
+            case KeyEvent.VK_DOWN:
+            controleTecla[1] = pressionada;
+            break;
+
+            case KeyEvent.VK_LEFT:
+            controleTecla[2] = pressionada;
+            break;
+
+            case KeyEvent.VK_RIGHT:
+            controleTecla[3] = pressionada;
+            break;
+        }
+    }
+
+    
 }
