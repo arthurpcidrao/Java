@@ -195,8 +195,6 @@ public class UmJogo extends JFrame {
             controleTecla[3] = pressionada;
             break;
         }
-    }
-
-    
+    }  
 
 }
