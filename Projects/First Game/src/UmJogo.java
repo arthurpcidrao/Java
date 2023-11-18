@@ -158,7 +158,7 @@ public class UmJogo extends JFrame {
                 }
                 else{
                     bloco.y += bloco.velocidade;
-                }
+                    }
             }
 
             pontos = pontos + blocos.length;
