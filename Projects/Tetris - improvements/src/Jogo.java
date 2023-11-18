@@ -171,7 +171,7 @@ public class Jogo extends JFrame {
 
 				if (cenario == null) {
 					g2d.setColor(Color.WHITE);
-					g2d.drawString("O Cen�rio � uma ilus�o...", 20, 20);
+					g2d.drawString("O Cenário é uma ilusão...", 20, 20);
 
 				} else {
 					if (!Jogo.pausado)
