@@ -23,11 +23,9 @@ public class Menu extends Texto {
 
 	@Override
 	public void desenha(Graphics2D g) {
-		if (opcoes == null)
-			return;
 
 		g.setColor(getCor());
-		super.desenha(g, String.format("%s: <%s>", getRotulo(), opcoes[idx]), getPx(), getPy() + getAltura());
+		super.desenha(g, String.format("%s", getRotulo()), getPx(), getPy() + getAltura());
 
 		if (selecionado)
 			g.drawLine(getPx(), getPy() + getAltura() + 5, getPx() + getLargura(), getPy() + getAltura() + 5);

@@ -6,7 +6,7 @@ public class Texto extends Elemento {
 	private Font fonte;
 
 	public Texto() {
-		this(16);
+		this(30);
 	}
 
 	public Texto(int tamanho) {

@@ -1,3 +1,4 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -12,17 +13,20 @@ import javax.swing.JPanel;
 public class Jogo extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private static final int FPS = 1000 / 20;
+	private static final int FPS = 1000/20;
 	private static final int JANELA_ALTURA = 672;
 	private static final int JANELA_LARGURA = 500;
+	private static final int largura_adicional = 250;
 
 	private JPanel tela;
+	private JPanel tela_ranking;
 	private Graphics2D g2d;
 	private BufferedImage buffer;
 	private CenarioPadrao cenario;
+	//private CenarioPadrao cenario_backup;
 
 	public enum Tecla {
-		CIMA, BAIXO, ESQUERDA, DIREITA, BA, BB, BC
+		CIMA, BAIXO, ESQUERDA, DIREITA, ENTER, ESC, ESPACO
 	}
 
 	public static boolean[] controleTecla = new boolean[Tecla.values().length];
@@ -49,19 +53,19 @@ public class Jogo extends JFrame {
 			break;
 
 		case KeyEvent.VK_ESCAPE:
-			controleTecla[Tecla.BB.ordinal()] = pressionada;
+			controleTecla[Tecla.ESC.ordinal()] = pressionada;
 			break;
 
 		case KeyEvent.VK_SPACE:
-			controleTecla[Tecla.BC.ordinal()] = pressionada;
+			controleTecla[Tecla.ESPACO.ordinal()] = pressionada;
 			break;
 
 		case KeyEvent.VK_ENTER:
-			controleTecla[Tecla.BA.ordinal()] = pressionada;
+			controleTecla[Tecla.ENTER.ordinal()] = pressionada;
 		}
 	}
 
-	public static int nivel = 1;
+	public static int nivel;
 
 	public static boolean pausado;
 
@@ -106,7 +110,14 @@ public class Jogo extends JFrame {
 			}
 		};
 
-		getContentPane().add(tela);
+		tela_ranking = new JPanel();
+		tela_ranking.setBackground(Color.BLACK);
+		tela_ranking.setPreferredSize(new Dimension(largura_adicional, JANELA_ALTURA));
+		getContentPane().add(tela_ranking, BorderLayout.EAST);
+
+		setBackground(Color.BLACK);
+		setTitle("Tetris - Arthur Paraiba Cidrão");
+		getContentPane().add(tela, BorderLayout.WEST);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		pack();
@@ -130,12 +141,13 @@ public class Jogo extends JFrame {
 				g2d.setColor(Color.DARK_GRAY);
 				g2d.fillRect(0, 0, JANELA_LARGURA, JANELA_ALTURA);
 
-				if (controleTecla[Tecla.BA.ordinal()]) {
-					// Pressionou espa�o ou enter
+				if (controleTecla[Tecla.ENTER.ordinal()]) {
+					// Pressionou espaço ou enter
 					if (cenario instanceof InicioCenario) {
 						cenario.descarregar();
 						cenario = null;
 						cenario = new JogoCenario(tela.getWidth(), tela.getHeight());
+						
 
 						g2d.setColor(Color.WHITE);
 						g2d.drawString("Carregando...", 20, 20);
@@ -149,7 +161,7 @@ public class Jogo extends JFrame {
 
 					liberaTeclas();
 
-				} else if (controleTecla[Tecla.BB.ordinal()]) {
+				} else if (controleTecla[Tecla.ESC.ordinal()]) {
 					// Pressionou ESQ
 					if (!(cenario instanceof InicioCenario)) {
 						cenario.descarregar();
@@ -175,7 +187,7 @@ public class Jogo extends JFrame {
 
 					if (Jogo.pausado) {
 						g2d.setColor(Color.WHITE);
-						g2d.drawString("Pausado", tela.getWidth() / 2 - 4, tela.getHeight() / 2);
+						g2d.drawString("Pausado", (tela.getWidth()) / 2 - 4, tela.getHeight() / 2);
 					}
 				}
 

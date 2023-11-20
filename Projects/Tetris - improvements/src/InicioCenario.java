@@ -11,9 +11,8 @@ public class InicioCenario extends CenarioPadrao {
 	@Override
 	public void carregar() {
 
-		menuJogo = new Menu("Nível");
-
-		menuJogo.addOpcoes("1", "2", "3", "4", "5", "6", "7", "8", "9");
+		menuJogo = new Menu("TETRIS");
+		Jogo.nivel = 1;
 
 		Util.centraliza(menuJogo, largura, altura);
 

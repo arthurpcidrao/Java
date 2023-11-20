@@ -44,7 +44,7 @@ public class JogoCenario extends CenarioPadrao {
 	private int linhasFeitas;
 
 	private boolean animar;
-	private boolean depurar;
+	private boolean depurar = false;  // variável de teste
 
 	private Estado estado = Estado.JOGANDO;
 
@@ -63,15 +63,16 @@ public class JogoCenario extends CenarioPadrao {
 
 	@Override
 	public void carregar() {
-		largBloco = largura / grade.length;
-		altBloco = altura / grade[0].length;
+		largBloco = largura / grade.length;  // definição da largura do bloco
+		altBloco = altura / grade[0].length;  // definição da altura do bloco
 
+		// preenchendo a grade do jogo com espaços vazios
 		for (int i = 0; i < grade.length; i++) {
 			for (int j = 0; j < grade[0].length; j++) {
 				grade[i][j] = ESPACO_VAZIO;
 			}
 		}
-
+		//------------------------------ MÚSICAS DO JOGO ------------------------------//
 		Type[] audioFileTypes = AudioSystem.getAudioFileTypes();
 		for (Type t : audioFileTypes) {
 			System.out.println(t.getExtension());
@@ -97,13 +98,14 @@ public class JogoCenario extends CenarioPadrao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		//-----------------------------------------------------------------------------//
 
-		adicionaPeca();
+		adicionaPeca();  // função para adição de uma nova peça.
 	}
 
 	@Override
 	public void descarregar() {
-
+		//------------------------------ MÚSICAS DO JOGO ------------------------------//
 		if (clipAdicionarPeca != null) {
 			clipAdicionarPeca.stop();
 			clipAdicionarPeca.close();
@@ -118,6 +120,7 @@ public class JogoCenario extends CenarioPadrao {
 			seqSomDeFundo.stop();
 			seqSomDeFundo.close();
 		}
+		//-----------------------------------------------------------------------------//
 	}
 
 	@Override
@@ -127,6 +130,7 @@ public class JogoCenario extends CenarioPadrao {
 			return;
 		}
 
+		//-------- Quando botão é apertado, verifica possibilidade do movimento --------//
 		if (Jogo.controleTecla[Jogo.Tecla.ESQUERDA.ordinal()]) {
 			if (validaMovimento(peca, ppx - 1, ppy))
 				ppx--;
@@ -144,7 +148,7 @@ public class JogoCenario extends CenarioPadrao {
 				ppy++;
 		}
 
-		if (depurar && Jogo.controleTecla[Jogo.Tecla.BC.ordinal()]) {
+		if (depurar && Jogo.controleTecla[Jogo.Tecla.ESPACO.ordinal()]) {
 			if (++idPeca == Peca.PECAS.length)
 				idPeca = 0;
 
@@ -157,7 +161,7 @@ public class JogoCenario extends CenarioPadrao {
 		if (animar && temporizador >= 5) {
 			animar = false;
 
-			descerColunas();
+			descerColunas();  // quando uma linha é totalmente preenchida, essa linha desaparece e todas as linhas de cima descem.
 			adicionaPeca();
 
 		} else if (temporizador >= 20) {
@@ -176,8 +180,9 @@ public class JogoCenario extends CenarioPadrao {
 
 					peca = null;
 
-					if (!animar)
+					if (!animar){
 						adicionaPeca();
+					}
 
 				} else {
 					estado = Estado.PERDEU;
