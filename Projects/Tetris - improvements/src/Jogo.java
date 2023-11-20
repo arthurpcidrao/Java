@@ -12,19 +12,13 @@ import javax.swing.JPanel;
 public class Jogo extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-
 	private static final int FPS = 1000 / 20;
-
 	private static final int JANELA_ALTURA = 672;
-
 	private static final int JANELA_LARGURA = 500;
 
 	private JPanel tela;
-
 	private Graphics2D g2d;
-
 	private BufferedImage buffer;
-
 	private CenarioPadrao cenario;
 
 	public enum Tecla {
