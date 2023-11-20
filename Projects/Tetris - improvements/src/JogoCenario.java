@@ -41,7 +41,7 @@ public class JogoCenario extends CenarioPadrao {
 
 	private int nivel = Jogo.nivel;
 	private int pontos;
-	private int linhasFeistas;
+	private int linhasFeitas;
 
 	private boolean animar;
 	private boolean depurar;
@@ -333,14 +333,14 @@ public class JogoCenario extends CenarioPadrao {
 		}
 
 		pontos += multPontos * multPontos;
-		linhasFeistas += multPontos;
+		linhasFeitas += multPontos;
 
-		if (nivel == 9 && linhasFeistas >= 9) {
+		if (nivel == 9 && linhasFeitas >= 9) {
 			estado = Estado.GANHOU;
 
-		} else if (linhasFeistas >= 9) {
+		} else if (linhasFeitas >= 9) {
 			nivel++;
-			linhasFeistas = 0;
+			linhasFeitas = 0;
 		}
 
 		return multPontos > 0;
@@ -522,7 +522,7 @@ public class JogoCenario extends CenarioPadrao {
 		}
 
 		texto.setCor(Color.WHITE);
-		texto.desenha(g, "Level " + nivel + " - " + linhasFeistas, largura / 2 - 20, 20);
+		texto.desenha(g, "Level " + nivel + " - " + linhasFeitas, largura / 2 - 20, 20);
 		texto.desenha(g, String.valueOf(pontos), largura - 50, 20);
 
 		if (estado != Estado.JOGANDO) {
