@@ -161,7 +161,7 @@ public class JogoCenario extends CenarioPadrao {
 		if (animar && temporizador >= 5) {
 			animar = false;
 
-			descerColunas();  // quando uma linha é totalmente preenchida, essa linha desaparece e todas as linhas de cima descem.
+			descerColunas();  // reorganiza a grade quando uma linha fica completa
 			adicionaPeca();
 
 		} else if (temporizador >= 20) {
@@ -176,7 +176,7 @@ public class JogoCenario extends CenarioPadrao {
 
 				if (!parouForaDaGrade()) {
 					adicionarPecaNaGrade();
-					animar = marcarLinha();
+					animar = marcarLinha();// quando uma linha é totalmente preenchida, essa linha desaparece e todas as linhas de cima descem.
 
 					peca = null;
 
@@ -264,7 +264,7 @@ public class JogoCenario extends CenarioPadrao {
 		return true;
 	}
 
-	private boolean parouForaDaGrade() {
+	private boolean parouForaDaGrade() {  // Se sim (parou fora da grade), significa que você perdeu!
 
 		if (peca == null)
 			return false;
@@ -316,7 +316,7 @@ public class JogoCenario extends CenarioPadrao {
 		return false;
 	}
 
-	private boolean marcarLinha() {
+	private boolean marcarLinha() { // elimina linhas completadas e faz a marcação de pontos
 		int multPontos = 0;
 
 		for (int lin = grade[0].length - 1; lin >= 0; lin--) {
@@ -340,7 +340,7 @@ public class JogoCenario extends CenarioPadrao {
 		pontos += multPontos * multPontos;
 		linhasFeitas += multPontos;
 
-		if (nivel == 9 && linhasFeitas >= 9) {
+		if (nivel == 9 && linhasFeitas >= 9) {   // ajustar para não ter limite. o jogo só termina quando perde
 			estado = Estado.GANHOU;
 
 		} else if (linhasFeitas >= 9) {
@@ -386,7 +386,7 @@ public class JogoCenario extends CenarioPadrao {
 
 	}
 
-	protected void girarPeca(boolean sentidoHorario) {
+	protected void girarPeca(boolean sentidoHorario) {  //com a letra Z, devemos conseguir girar no sentido antihorário, basicamente repetir a função
 		if (peca == null)
 			return;
 
