@@ -144,8 +144,11 @@ public class JogoCenario extends CenarioPadrao {
 			girarReposicionarPeca(false);
 
 		} else if (Jogo.controleTecla[Jogo.Tecla.BAIXO.ordinal()]) {
-			if (validaMovimento(peca, ppx, ppy + 1))
+			if (validaMovimento(peca, ppx, ppy + 1)){
 				ppy++;
+				pontos++;
+				//System.out.printf("*Pontos = %d*\n", pontos);
+			}
 		}
 
 		if (depurar && Jogo.controleTecla[Jogo.Tecla.ESPACO.ordinal()]) {
@@ -158,6 +161,8 @@ public class JogoCenario extends CenarioPadrao {
 
 		Jogo.liberaTeclas();
 
+		//System.out.println(temporizador);
+
 		if (animar && temporizador >= 5) {
 			animar = false;
 
@@ -166,6 +171,7 @@ public class JogoCenario extends CenarioPadrao {
 
 		} else if (temporizador >= 20) {  // o valor 20 vem de 1000/20 FPS
 			temporizador = 0;
+			//System.out.println("ciclo completo\n");
 
 			if (colidiu(ppx, ppy + 1)) {
 
@@ -340,15 +346,17 @@ public class JogoCenario extends CenarioPadrao {
 		if(multPontos == 4){
 			pontoExtra = 100;
 		}
-
-		pontos += 100 + 200*(multPontos - 1) + pontoExtra; // pontuação atualizada
-		linhasFeitas += multPontos;
+		if (multPontos > 0){
+			pontos += (100 + 200*(multPontos - 1) + pontoExtra)*nivel; // pontuação atualizada
+			linhasFeitas += multPontos;
+		}
+		
 
 		if (linhasFeitas >= 2) { // ORIGINAL É 9... voltar pra 9
 			nivel++;
 			linhasFeitas = 0;
 		}
-		System.out.printf("pontos = %d \nmultpontos = %d\n\n", pontos, multPontos);
+		//System.out.printf("pontos = %d \nmultpontos = %d\n\n", pontos, multPontos);
 
 		return multPontos > 0;
 	}

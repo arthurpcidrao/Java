@@ -16,10 +16,11 @@ public class Jogo extends JFrame {
 	private static final int FPS = 1000/20;
 	private static final int JANELA_ALTURA = 672;
 	private static final int JANELA_LARGURA = 500;
-	private static final int largura_adicional = 250;
+	private static final int largura_extra = 250;
 
 	private JPanel tela;
-	private JPanel tela_ranking;
+	private JPanel tela_direita;
+	private JPanel tela_esquerda;
 	private Graphics2D g2d;
 	private BufferedImage buffer;
 	private CenarioPadrao cenario;
@@ -110,14 +111,19 @@ public class Jogo extends JFrame {
 			}
 		};
 
-		tela_ranking = new JPanel();
-		tela_ranking.setBackground(Color.BLACK);
-		tela_ranking.setPreferredSize(new Dimension(largura_adicional, JANELA_ALTURA));
-		getContentPane().add(tela_ranking, BorderLayout.EAST);
+		tela_direita = new JPanel();
+		tela_direita.setBackground(Color.BLACK);
+		tela_direita.setPreferredSize(new Dimension(largura_extra, JANELA_ALTURA));
+		getContentPane().add(tela_direita, BorderLayout.EAST);
+
+		tela_esquerda = new JPanel();
+		tela_esquerda.setBackground(Color.BLACK);
+		tela_esquerda.setPreferredSize(new Dimension(largura_extra, JANELA_ALTURA));
+		getContentPane().add(tela_esquerda, BorderLayout.WEST);
 
 		setBackground(Color.BLACK);
 		setTitle("Tetris - Arthur Paraiba Cidrão");
-		getContentPane().add(tela, BorderLayout.WEST);
+		getContentPane().add(tela, BorderLayout.CENTER);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		pack();

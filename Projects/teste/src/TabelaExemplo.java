@@ -26,9 +26,11 @@ public class TabelaExemplo extends JFrame {
 
         // Adiciona a tabela a um JScrollPane para rolagem, se necessário
         JScrollPane scrollPane = new JScrollPane(table);
+        
 
         // Adiciona o JScrollPane (com a tabela) ao JFrame
         add(scrollPane, BorderLayout.EAST);
+        
     }
 
     public static void main(String[] args) {
