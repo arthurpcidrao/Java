@@ -13,7 +13,7 @@ import javax.sound.sampled.Clip;
 public class JogoCenario extends CenarioPadrao {
 
 	enum Estado {
-		JOGANDO, GANHOU, PERDEU
+		JOGANDO, PERDEU
 	}
 
 	private static final int ESPACAMENTO = 2;
@@ -28,7 +28,7 @@ public class JogoCenario extends CenarioPadrao {
 
 	private final int[][] grade = new int[10][16];
 
-	private int temporizador = 0;
+	private int temporizador = 0;  // TEMPO DE DESCIDA. Quando chega em 20, zera. nível 1, cresce de 1 em 1, nível 2 cresce de 2 em 2.
 
 	private Texto texto = new Texto(20);
 
@@ -164,7 +164,7 @@ public class JogoCenario extends CenarioPadrao {
 			descerColunas();  // reorganiza a grade quando uma linha fica completa
 			adicionaPeca();
 
-		} else if (temporizador >= 20) {
+		} else if (temporizador >= 20) {  // o valor 20 vem de 1000/20 FPS
 			temporizador = 0;
 
 			if (colidiu(ppx, ppy + 1)) {
@@ -318,6 +318,7 @@ public class JogoCenario extends CenarioPadrao {
 
 	private boolean marcarLinha() { // elimina linhas completadas e faz a marcação de pontos
 		int multPontos = 0;
+		int pontoExtra = 0;
 
 		for (int lin = grade[0].length - 1; lin >= 0; lin--) {
 			boolean linhaCompleta = true;
@@ -336,17 +337,18 @@ public class JogoCenario extends CenarioPadrao {
 				}
 			}
 		}
+		if(multPontos == 4){
+			pontoExtra = 100;
+		}
 
-		pontos += multPontos * multPontos;
+		pontos += 100 + 200*(multPontos - 1) + pontoExtra; // pontuação atualizada
 		linhasFeitas += multPontos;
 
-		if (nivel == 9 && linhasFeitas >= 9) {   // ajustar para não ter limite. o jogo só termina quando perde
-			estado = Estado.GANHOU;
-
-		} else if (linhasFeitas >= 9) {
+		if (linhasFeitas >= 2) { // voltar pra 9
 			nivel++;
 			linhasFeitas = 0;
 		}
+		System.out.printf("pontos = %d \nmultpontos = %d\n\n", pontos, multPontos);
 
 		return multPontos > 0;
 	}
@@ -533,10 +535,9 @@ public class JogoCenario extends CenarioPadrao {
 		if (estado != Estado.JOGANDO) {
 			texto.setCor(Color.WHITE);
 
-			if (estado == Estado.GANHOU)
-				texto.desenha(g, "Finalmente!", 180, 180);
-			else
+			if (estado == Estado.PERDEU){
 				texto.desenha(g, "Deu ruim!", 180, 180);
+			}
 		}
 	}
 
