@@ -344,7 +344,7 @@ public class JogoCenario extends CenarioPadrao {
 		pontos += 100 + 200*(multPontos - 1) + pontoExtra; // pontuação atualizada
 		linhasFeitas += multPontos;
 
-		if (linhasFeitas >= 2) { // voltar pra 9
+		if (linhasFeitas >= 2) { // ORIGINAL É 9... voltar pra 9
 			nivel++;
 			linhasFeitas = 0;
 		}
