@@ -393,7 +393,7 @@ public class JogoCenario extends CenarioPadrao {
 		}
 		
 
-		if (linhasFeitas >= 2) { // ORIGINAL É 9... voltar pra 9
+		if (linhasFeitas >= 9) { // ORIGINAL É 9... voltar pra 9
 			nivel++;
 			linhasFeitas = 0;
 		}
