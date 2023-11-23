@@ -47,6 +47,7 @@ public class JogoCenario extends CenarioPadrao {
 	private boolean depurar = false;  // variável de teste
 
 	private Estado estado = Estado.JOGANDO;
+	private int comecoX = 250;
 
 	// Som
 	private AudioInputStream as;
@@ -58,7 +59,7 @@ public class JogoCenario extends CenarioPadrao {
 	private Sequencer seqSomDeFundo;
 
 	public JogoCenario(int largura, int altura) {
-		super(largura, altura);
+		super(largura-500, altura);
 	}
 
 	@Override
@@ -473,20 +474,29 @@ public class JogoCenario extends CenarioPadrao {
 
 	@Override
 	public void desenhar(Graphics2D g) {
+		g.setColor(Color.PINK);
+		g.drawLine(comecoX, 0, comecoX, altura);
+		
+		g.setColor(Color.PINK);
+		g.drawLine(comecoX+largura, 0, comecoX+largura, altura);
 
 		for (int col = 0; col < grade.length; col++) {
 			for (int lin = 0; lin < grade[0].length; lin++) {
 				int valor = grade[col][lin];
 
-				if (valor == ESPACO_VAZIO)
+				if (valor == ESPACO_VAZIO){
+					g.setColor(Color.BLACK);
+					//g.fillRect(col*largBloco, lin*altBloco, largBloco, altBloco);
 					continue;
-
-				if (valor == LINHA_COMPLETA)
+				}
+				if (valor == LINHA_COMPLETA){
 					g.setColor(Color.RED);
-				else
+				}
+				else{
 					g.setColor(Peca.Cores[valor]);
+				}
 
-				int x = col * largBloco + ESPACAMENTO;
+				int x = comecoX + col * largBloco + ESPACAMENTO;
 				int y = lin * altBloco + ESPACAMENTO;
 
 				g.fillRect(x, y, largBloco - ESPACAMENTO, altBloco - ESPACAMENTO);
@@ -501,14 +511,14 @@ public class JogoCenario extends CenarioPadrao {
 				for (int lin = 0; lin < peca[col].length; lin++) {
 					if (peca[lin][col] != 0) {
 
-						int x = (col + ppx) * largBloco + ESPACAMENTO;
+						int x = comecoX + (col + ppx) * largBloco + ESPACAMENTO;
 						int y = (lin + ppy) * altBloco + ESPACAMENTO;
 
 						g.fillRect(x, y, largBloco - ESPACAMENTO, altBloco - ESPACAMENTO);
 
 					} else if (depurar) {
 						g.setColor(Color.PINK);
-						int x = (col + ppx) * largBloco + ESPACAMENTO;
+						int x = comecoX + (col + ppx) * largBloco + ESPACAMENTO;
 						int y = (lin + ppy) * altBloco + ESPACAMENTO;
 
 						g.fillRect(x, y, largBloco - ESPACAMENTO, altBloco - ESPACAMENTO);
@@ -519,7 +529,7 @@ public class JogoCenario extends CenarioPadrao {
 			}
 		}
 
-		int miniatura = largBloco / 4;
+		int miniatura = largBloco / 2;
 		int[][] prxPeca = Peca.PECAS[idPrxPeca];
 		g.setColor(Peca.Cores[idPrxPeca]);
 
@@ -528,7 +538,7 @@ public class JogoCenario extends CenarioPadrao {
 				if (prxPeca[lin][col] == 0)
 					continue;
 
-				int x = col * miniatura + ESPACAMENTO;
+				int x = comecoX + largura + col * miniatura + 3*ESPACAMENTO;
 				int y = lin * miniatura + ESPACAMENTO;
 
 				g.fillRect(x, y, miniatura - ESPACAMENTO, miniatura - ESPACAMENTO);
@@ -537,8 +547,8 @@ public class JogoCenario extends CenarioPadrao {
 		}
 
 		texto.setCor(Color.WHITE);
-		texto.desenha(g, "Level " + nivel + " - " + linhasFeitas, largura / 2 - 20, 20);
-		texto.desenha(g, String.valueOf(pontos), largura - 50, 20);
+		texto.desenha(g, "Level: " + nivel + "." + linhasFeitas, (comecoX/5), 50);
+		texto.desenha(g, "Pontos:   " + String.valueOf(pontos), (comecoX/5), 100);
 
 		if (estado != Estado.JOGANDO) {
 			texto.setCor(Color.WHITE);

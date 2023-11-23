@@ -11,20 +11,17 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Jogo extends JFrame {
-
+  
 	private static final long serialVersionUID = 1L;
 	private static final int FPS = 1000/20;
 	private static final int JANELA_ALTURA = 672;
-	private static final int JANELA_LARGURA = 500;
-	private static final int largura_extra = 250;
+	public static final int largura_extra = 250;
+	private static final int JANELA_LARGURA = largura_extra + 500 + largura_extra;
 
 	private JPanel tela;
-	private JPanel tela_direita;
-	private JPanel tela_esquerda;
 	private Graphics2D g2d;
 	private BufferedImage buffer;
 	private CenarioPadrao cenario;
-	//private CenarioPadrao cenario_backup;
 
 	public enum Tecla {
 		CIMA, BAIXO, ESQUERDA, DIREITA, ENTER, ESC, ESPACO
@@ -111,15 +108,15 @@ public class Jogo extends JFrame {
 			}
 		};
 
-		tela_direita = new JPanel();
-		tela_direita.setBackground(Color.BLACK);
-		tela_direita.setPreferredSize(new Dimension(largura_extra, JANELA_ALTURA));
-		getContentPane().add(tela_direita, BorderLayout.EAST);
+		//tela_direita = new JPanel();
+		//tela_direita.setBackground(Color.BLACK);
+		//tela_direita.setPreferredSize(new Dimension(largura_extra, JANELA_ALTURA));
+		//getContentPane().add(tela_direita, BorderLayout.EAST);
 
-		tela_esquerda = new JPanel();
-		tela_esquerda.setBackground(Color.BLACK);
-		tela_esquerda.setPreferredSize(new Dimension(largura_extra, JANELA_ALTURA));
-		getContentPane().add(tela_esquerda, BorderLayout.WEST);
+		//tela_esquerda = new JPanel();
+		//tela_esquerda.setBackground(Color.BLACK);
+		//tela_esquerda.setPreferredSize(new Dimension(largura_extra, JANELA_ALTURA));
+		//getContentPane().add(tela_esquerda, BorderLayout.WEST);
 
 		setBackground(Color.BLACK);
 		setTitle("Tetris - Arthur Paraiba Cidrão");
@@ -144,7 +141,7 @@ public class Jogo extends JFrame {
 		while (true) {
 			if (System.currentTimeMillis() >= prxAtualizacao) {
 
-				g2d.setColor(Color.DARK_GRAY);
+				g2d.setColor(Color.BLACK);
 				g2d.fillRect(0, 0, JANELA_LARGURA, JANELA_ALTURA);
 
 				if (controleTecla[Tecla.ENTER.ordinal()]) {
@@ -153,11 +150,11 @@ public class Jogo extends JFrame {
 						cenario.descarregar();
 						cenario = null;
 						cenario = new JogoCenario(tela.getWidth(), tela.getHeight());
-						
 
 						g2d.setColor(Color.WHITE);
 						g2d.drawString("Carregando...", 20, 20);
 						tela.repaint();
+						
 
 						cenario.carregar();
 
