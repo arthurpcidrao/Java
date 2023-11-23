@@ -36,6 +36,8 @@ public class JogoCenario extends CenarioPadrao {
 
 	private int idPeca = -1;
 	private int idPrxPeca = -1;
+	private int idPrxPeca2 = -1;
+	private int idPrxPeca3 = -1;
 	private Color corPeca;
 	private int[][] peca;
 
@@ -209,16 +211,28 @@ public class JogoCenario extends CenarioPadrao {
 		ppx = grade.length / 2 - 1;
 
 		// Primeira chamada
-		if (idPeca == -1)
+		if (idPeca == -1){
 			idPeca = rand.nextInt(Peca.PECAS.length);
-		else
-			idPeca = idPrxPeca;
-		// idPeca=6;
-		idPrxPeca = rand.nextInt(Peca.PECAS.length);
-
-		// Isso acontece muito
-		if (idPeca == idPrxPeca)
 			idPrxPeca = rand.nextInt(Peca.PECAS.length);
+			idPrxPeca2 = rand.nextInt(Peca.PECAS.length);
+		}
+		else{
+			idPeca = idPrxPeca;  // original
+			idPrxPeca = idPrxPeca2;
+			idPrxPeca2 = idPrxPeca3;
+		}
+		idPrxPeca3 = rand.nextInt(Peca.PECAS.length);
+		
+		// Isso acontece muito
+		if (idPeca == idPrxPeca){
+			idPrxPeca = rand.nextInt(Peca.PECAS.length);
+		}
+		if (idPrxPeca == idPrxPeca2){
+			idPrxPeca2 = rand.nextInt(Peca.PECAS.length);
+		}
+		if (idPrxPeca2 == idPrxPeca3){
+			idPrxPeca3 = rand.nextInt(Peca.PECAS.length);
+		}
 
 		peca = Peca.PECAS[idPeca];
 		corPeca = Peca.Cores[idPeca];
@@ -480,6 +494,9 @@ public class JogoCenario extends CenarioPadrao {
 		g.setColor(Color.PINK);
 		g.drawLine(comecoX+largura, 0, comecoX+largura, altura);
 
+		g.setColor(Color.PINK);
+		g.drawRect(comecoX + largura + 5, 20, 87, 110);
+
 		for (int col = 0; col < grade.length; col++) {
 			for (int lin = 0; lin < grade[0].length; lin++) {
 				int valor = grade[col][lin];
@@ -529,22 +546,19 @@ public class JogoCenario extends CenarioPadrao {
 			}
 		}
 
-		int miniatura = largBloco / 2;
-		int[][] prxPeca = Peca.PECAS[idPrxPeca];
-		g.setColor(Peca.Cores[idPrxPeca]);
-
-		for (int col = 0; col < prxPeca.length; col++) {
-			for (int lin = 0; lin < prxPeca[col].length; lin++) {
-				if (prxPeca[lin][col] == 0)
-					continue;
-
-				int x = comecoX + largura + col * miniatura + 3*ESPACAMENTO;
-				int y = lin * miniatura + ESPACAMENTO;
-
-				g.fillRect(x, y, miniatura - ESPACAMENTO, miniatura - ESPACAMENTO);
-
-			}
-		}
+		// desenha peças localizadas na parte direita da janela (próximas peças)
+		desenhaPeca(2, Peca.PECAS[idPrxPeca], idPrxPeca, g, 10, 25, comecoX+largura);
+		desenhaPeca(4, Peca.PECAS[idPrxPeca2], idPrxPeca2, g, 100, 50, comecoX+largura);
+		desenhaPeca(4 , Peca.PECAS[idPrxPeca3], idPrxPeca3, g, 150, 50, comecoX+largura);
+		
+		// desenha peças localizadas na parte esquerda da janela (estatística das peças)
+		desenhaPeca(4, Peca.PECAS[0], 0, g, 50, 200, 0);
+		desenhaPeca(4, Peca.PECAS[1], 1, g, 50, 260, 0);
+		desenhaPeca(4, Peca.PECAS[2], 2, g, 50, 320, 0);
+		desenhaPeca(4, Peca.PECAS[3], 3, g, 50, 380, 0);
+		desenhaPeca(4, Peca.PECAS[4], 4, g, 50, 440, 0);
+		desenhaPeca(4, Peca.PECAS[5], 5, g, 50, 500, 0);
+		desenhaPeca(4, Peca.PECAS[6], 6, g, 50, 560, 0);
 
 		texto.setCor(Color.WHITE);
 		texto.desenha(g, "Level: " + nivel + "." + linhasFeitas, (comecoX/5), 50);
@@ -559,4 +573,24 @@ public class JogoCenario extends CenarioPadrao {
 		}
 	}
 
+
+	public void desenhaPeca(int escala, int[][] blocoP, int id, Graphics2D g, int ajusteX, int ajusteY, int comeca) {
+
+		int miniatura = largBloco / escala;
+		blocoP = Peca.PECAS[id];
+		g.setColor(Peca.Cores[id]);
+
+		for (int col = 0; col < blocoP.length; col++) {
+			for (int lin = 0; lin < blocoP[col].length; lin++) {
+				if (blocoP[lin][col] == 0)
+					continue;
+
+				int x = comeca + col * miniatura + ESPACAMENTO;
+				int y = lin * miniatura + ESPACAMENTO;
+
+				g.fillRect(x + ajusteX, y + ajusteY, miniatura - ESPACAMENTO, miniatura - ESPACAMENTO);
+
+			}
+		}
+	}
 }
