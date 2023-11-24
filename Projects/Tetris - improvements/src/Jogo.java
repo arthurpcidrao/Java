@@ -24,7 +24,7 @@ public class Jogo extends JFrame {
 	private CenarioPadrao cenario;
 
 	public enum Tecla {
-		CIMA, BAIXO, ESQUERDA, DIREITA, Z, ENTER, ESC, ESPACO
+		CIMA, BAIXO, ESQUERDA, DIREITA, Z, W, ENTER, ESC, ESPACO
 	}
 
 	public static boolean[] controleTecla = new boolean[Tecla.values().length];
@@ -57,6 +57,9 @@ public class Jogo extends JFrame {
 			break;
 		case KeyEvent.VK_SPACE:
 			controleTecla[Tecla.ESPACO.ordinal()] = pressionada;
+			break;
+		case KeyEvent.VK_W:
+			controleTecla[Tecla.W.ordinal()] = pressionada;
 			break;
 		case KeyEvent.VK_ENTER:
 			controleTecla[Tecla.ENTER.ordinal()] = pressionada;

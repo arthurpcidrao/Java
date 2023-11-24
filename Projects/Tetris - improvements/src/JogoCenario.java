@@ -147,7 +147,7 @@ public class JogoCenario extends CenarioPadrao {
 
 		if (Jogo.controleTecla[Jogo.Tecla.CIMA.ordinal()]) {
 			girarReposicionarPeca(true);
-			
+
 		} else if (Jogo.controleTecla[Jogo.Tecla.Z.ordinal()]){
 			girarReposicionarPeca(false);
 		}
@@ -158,9 +158,21 @@ public class JogoCenario extends CenarioPadrao {
 				pontos++;
 				//System.out.printf("*Pontos = %d*\n", pontos);
 			}
+
+		} else if (Jogo.controleTecla[Jogo.Tecla.ESPACO.ordinal()]){
+
+			if (validaMovimento(peca, ppx, ppy)){
+				for (int y = 0; y < 16; y++){
+
+					if(!colidiu(ppx, ppy + 1)){
+						ppy++;
+						pontos += 2;
+					}
+				}
+			}
 		}
 
-		if (depurar && Jogo.controleTecla[Jogo.Tecla.ESPACO.ordinal()]) {
+		if (depurar && Jogo.controleTecla[Jogo.Tecla.W.ordinal()]) {
 			if (++idPeca == Peca.PECAS.length)
 				idPeca = 0;
 
@@ -441,7 +453,7 @@ public class JogoCenario extends CenarioPadrao {
 
 	}
 
-	protected void girarPeca(boolean sentidoHorario) {  //com a letra Z, devemos conseguir girar no sentido antihorário, basicamente repetir a função
+	protected void girarPeca(boolean sentidoHorario) {
 		if (peca == null)
 			return;
 
@@ -581,6 +593,7 @@ public class JogoCenario extends CenarioPadrao {
 		desenhaPeca(4, Peca.PECAS[idPrxPeca2], idPrxPeca2, g, 100, 50, comecoX+largura);
 		desenhaPeca(4 , Peca.PECAS[idPrxPeca3], idPrxPeca3, g, 150, 50, comecoX+largura);
 		
+		//Criei função para não precisar repetir várias vezes a mesma coisa
 		// desenha peças localizadas na parte esquerda da janela (estatística das peças)
 		desenhaPeca(4, Peca.PECAS[0], 0, g, 50, 200, 0);
 		desenhaPeca(4, Peca.PECAS[1], 1, g, 50, 260, 0);
