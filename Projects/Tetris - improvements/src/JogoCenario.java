@@ -146,9 +146,13 @@ public class JogoCenario extends CenarioPadrao {
 		}
 
 		if (Jogo.controleTecla[Jogo.Tecla.CIMA.ordinal()]) {
+			girarReposicionarPeca(true);
+			
+		} else if (Jogo.controleTecla[Jogo.Tecla.Z.ordinal()]){
 			girarReposicionarPeca(false);
-
-		} else if (Jogo.controleTecla[Jogo.Tecla.BAIXO.ordinal()]) {
+		}
+		
+		if (Jogo.controleTecla[Jogo.Tecla.BAIXO.ordinal()]) {
 			if (validaMovimento(peca, ppx, ppy + 1)){
 				ppy++;
 				pontos++;

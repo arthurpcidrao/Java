@@ -24,7 +24,7 @@ public class Jogo extends JFrame {
 	private CenarioPadrao cenario;
 
 	public enum Tecla {
-		CIMA, BAIXO, ESQUERDA, DIREITA, ENTER, ESC, ESPACO
+		CIMA, BAIXO, ESQUERDA, DIREITA, Z, ENTER, ESC, ESPACO
 	}
 
 	public static boolean[] controleTecla = new boolean[Tecla.values().length];
@@ -49,15 +49,15 @@ public class Jogo extends JFrame {
 		case KeyEvent.VK_RIGHT:
 			controleTecla[Tecla.DIREITA.ordinal()] = pressionada;
 			break;
-
+		case KeyEvent.VK_Z:
+			controleTecla[Tecla.Z.ordinal()] = pressionada;
+			break;
 		case KeyEvent.VK_ESCAPE:
 			controleTecla[Tecla.ESC.ordinal()] = pressionada;
 			break;
-
 		case KeyEvent.VK_SPACE:
 			controleTecla[Tecla.ESPACO.ordinal()] = pressionada;
 			break;
-
 		case KeyEvent.VK_ENTER:
 			controleTecla[Tecla.ENTER.ordinal()] = pressionada;
 		}
@@ -107,16 +107,6 @@ public class Jogo extends JFrame {
 				return getPreferredSize();
 			}
 		};
-
-		//tela_direita = new JPanel();
-		//tela_direita.setBackground(Color.BLACK);
-		//tela_direita.setPreferredSize(new Dimension(largura_extra, JANELA_ALTURA));
-		//getContentPane().add(tela_direita, BorderLayout.EAST);
-
-		//tela_esquerda = new JPanel();
-		//tela_esquerda.setBackground(Color.BLACK);
-		//tela_esquerda.setPreferredSize(new Dimension(largura_extra, JANELA_ALTURA));
-		//getContentPane().add(tela_esquerda, BorderLayout.WEST);
 
 		setBackground(Color.BLACK);
 		setTitle("Tetris - Arthur Paraiba Cidrão");
