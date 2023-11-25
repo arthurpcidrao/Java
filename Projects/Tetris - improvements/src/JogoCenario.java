@@ -6,6 +6,7 @@ import java.util.Random;
 import javax.sound.midi.MidiSystem;
 import javax.sound.midi.Sequencer;
 import javax.sound.sampled.AudioFileFormat.Type;
+import javax.swing.JOptionPane;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -34,6 +35,8 @@ public class JogoCenario extends CenarioPadrao {
 
 	private Random rand = new Random();
 
+	private Ranking classificacao = new Ranking();
+
 	private int idPeca = -1;
 	private int idPrxPeca = -1;
 	private int idPrxPeca2 = -1;
@@ -51,6 +54,7 @@ public class JogoCenario extends CenarioPadrao {
 	private boolean depurar = false;  // variável de teste
 
 	private Estado estado = Estado.JOGANDO;
+	private boolean colocouNome = false;
 	private int comecoX = 250;
 
 	// Som
@@ -530,13 +534,11 @@ public class JogoCenario extends CenarioPadrao {
 
 	@Override
 	public void desenhar(Graphics2D g) {
+
+		// ---------------- LINHAS DELIMITADORAS ---------------- //
 		g.setColor(Color.PINK);
 		g.drawLine(comecoX, 0, comecoX, altura);
-		
-		g.setColor(Color.PINK);
 		g.drawLine(comecoX+largura, 0, comecoX+largura, altura);
-
-		g.setColor(Color.PINK);
 		g.drawRect(comecoX + largura + 5, 20, 87, 110);
 
 		for (int col = 0; col < grade.length; col++) {
@@ -621,6 +623,12 @@ public class JogoCenario extends CenarioPadrao {
 
 			if (estado == Estado.PERDEU){
 				texto.desenha(g, "Deu ruim!", comecoX+215, 250);
+				
+				if (!colocouNome){
+					String nome = JOptionPane.showInputDialog("Digite seu nome");
+					classificacao.addJogador(nome, pontos);
+					colocouNome = true;
+				}
 			}
 		}
 	}
