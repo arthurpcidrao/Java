@@ -15,4 +15,11 @@ public class Ranking {
     public void ordenar(){
         Collections.sort(ranking);
     }
+
+    public void imprimeRanking(){
+        for (Jogador j : ranking){
+            j.imprimeJogador();
+        }
+    }
+
 }

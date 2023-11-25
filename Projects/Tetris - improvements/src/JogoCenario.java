@@ -36,6 +36,7 @@ public class JogoCenario extends CenarioPadrao {
 	private Random rand = new Random();
 
 	private Ranking classificacao = new Ranking();
+	private String nome = "";
 
 	private int idPeca = -1;
 	private int idPrxPeca = -1;
@@ -618,6 +619,16 @@ public class JogoCenario extends CenarioPadrao {
 		texto.desenha(g, "Level: " + nivel + "." + linhasFeitas, (comecoX/5), 50);
 		texto.desenha(g, "Pontos:   " + String.valueOf(pontos), (comecoX/5), 100);
 
+		// ESTÁ GERANDO VÁRIAS VEZES, COLOCAR UM STOP AI DE ALGUMA FORMA.
+		classificacao.ordenar();
+		classificacao.imprimeRanking();
+
+		/*	
+		for (int i = 0; i < 10; i++){
+			
+		}
+		*/
+
 		if (estado != Estado.JOGANDO) {
 			texto.setCor(Color.WHITE);
 
@@ -625,7 +636,7 @@ public class JogoCenario extends CenarioPadrao {
 				texto.desenha(g, "Deu ruim!", comecoX+215, 250);
 				
 				if (!colocouNome){
-					String nome = JOptionPane.showInputDialog("Digite seu nome");
+					nome = JOptionPane.showInputDialog("Digite seu nome");
 					classificacao.addJogador(nome, pontos);
 					colocouNome = true;
 				}

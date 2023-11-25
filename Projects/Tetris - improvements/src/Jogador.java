@@ -21,10 +21,19 @@ public class Jogador implements Comparable<Jogador>{
         this.pontuacao = pontuacao;
     }
 
+    public void imprimeJogador(){
+        System.out.printf("%s %d\n", getNome(), getPontuacao());
+    }
+
     @Override
     public int compareTo(Jogador outroJogador) {
         
-        throw new UnsupportedOperationException("Unimplemented method 'compareTo'");
+        int ordem = -(this.pontuacao - outroJogador.getPontuacao());
+        if(ordem == 0){
+            ordem = this.nome.compareTo(outroJogador.getNome());
+        }
+        return ordem;
     }
+
 
 }
