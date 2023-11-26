@@ -162,6 +162,7 @@ public class Jogo extends JFrame {
 				} else if (controleTecla[Tecla.ESC.ordinal()]) {
 					// Pressionou ESQ
 					JogoCenario.pontos = 0;
+
 					if (!(cenario instanceof InicioCenario)) {
 						cenario.descarregar();
 
@@ -195,6 +196,8 @@ public class Jogo extends JFrame {
 					classificacao.ordenar();
 					classificacao.imprimeRanking();
 					JogoCenario.nome_rank = "";
+					
+					//qtde_jogos++;
 				}
 				
 				tela.repaint();

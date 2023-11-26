@@ -37,6 +37,8 @@ public class JogoCenario extends CenarioPadrao {
 
 	//private Ranking classificacao = new Ranking();
 	public static String nome_rank = "";  // era PRIVATE e SEM static
+	
+	private int desceY = 25;
 
 	private int idPeca = -1;
 	private int idPrxPeca = -1;
@@ -543,14 +545,6 @@ public class JogoCenario extends CenarioPadrao {
 		g.drawRect(comecoX + largura + 5, 20, 87, 110);
 
 
-		for (int i = 0; i < 10; i++){
-			Jogador jog_rank = Jogo.classificacao.getJogador(i);
-
-			texto.setCor(Color.WHITE);
-			texto.desenha(g, jog_rank.getNome() + "   " + jog_rank.getPontuacao(), 800, 225);
-		}
-
-
 		for (int col = 0; col < grade.length; col++) {
 			for (int lin = 0; lin < grade[0].length; lin++) {
 				int valor = grade[col][lin];
@@ -628,8 +622,6 @@ public class JogoCenario extends CenarioPadrao {
 		texto.desenha(g, "Level: " + nivel + "." + linhasFeitas, (comecoX/5), 50);
 		texto.desenha(g, "Pontos:   " + String.valueOf(pontos), (comecoX/5), 100);
 
-		// ESTÁ GERANDO VÁRIAS VEZES, COLOCAR UM STOP AI DE ALGUMA FORMA.
-		//classificacao.ordenar();
 
 		if (estado != Estado.JOGANDO) {
 			texto.setCor(Color.WHITE);
@@ -644,6 +636,61 @@ public class JogoCenario extends CenarioPadrao {
 				}
 			}
 		}
+
+
+		texto.desenha(g, "||------ Ranking ------||", 775, 200);
+		texto.setCor(Color.WHITE);
+
+		if (Jogo.classificacao.getTamanho() >= 1){
+			Jogador jog_rank1 = Jogo.classificacao.getJogador(0);
+			texto.desenha(g, 1 + "  -  " + jog_rank1.getNome() + "   " + jog_rank1.getPontuacao(), 765, 205 + 1*desceY);
+		}
+		
+		if (Jogo.classificacao.getTamanho() >= 2){
+			Jogador jog_rank2 = Jogo.classificacao.getJogador(1);
+			texto.desenha(g, 2 + "  -  " + jog_rank2.getNome() + "   " + jog_rank2.getPontuacao(), 765, 205 + 2*desceY);
+		}
+		
+		if (Jogo.classificacao.getTamanho() >= 3){
+			Jogador jog_rank3 = Jogo.classificacao.getJogador(2);
+			texto.desenha(g, 3 + "  -  " + jog_rank3.getNome() + "   " + jog_rank3.getPontuacao(), 765, 205 + 3*desceY);
+		}
+		
+		if (Jogo.classificacao.getTamanho() >= 4){
+			Jogador jog_rank4 = Jogo.classificacao.getJogador(3);
+			texto.desenha(g, 4 + "  -  " + jog_rank4.getNome() + "   " + jog_rank4.getPontuacao(), 765, 205 + 4*desceY);
+		}
+		
+		if (Jogo.classificacao.getTamanho() >= 5){
+			Jogador jog_rank5 = Jogo.classificacao.getJogador(4);
+			texto.desenha(g, 5 + "  -  " + jog_rank5.getNome() + "   " + jog_rank5.getPontuacao(), 765, 205 + 5*desceY);
+		}
+		
+		if (Jogo.classificacao.getTamanho() >= 6){
+			Jogador jog_rank6 = Jogo.classificacao.getJogador(5);
+			texto.desenha(g, 6 + "  -  " + jog_rank6.getNome() + "   " + jog_rank6.getPontuacao(), 765, 205 + 6*desceY);
+		}
+
+		if (Jogo.classificacao.getTamanho() >= 7){
+			Jogador jog_rank7 = Jogo.classificacao.getJogador(6);
+			texto.desenha(g, 7 + "  -  " + jog_rank7.getNome() + "   " + jog_rank7.getPontuacao(), 765, 205 + 7*desceY);
+		}
+
+		if (Jogo.classificacao.getTamanho() >= 8){
+			Jogador jog_rank8 = Jogo.classificacao.getJogador(7);
+			texto.desenha(g, 8 + "  -  " + jog_rank8.getNome() + "   " + jog_rank8.getPontuacao(), 765, 205 + 8*desceY);
+		}
+
+		if (Jogo.classificacao.getTamanho() >= 9){
+			Jogador jog_rank9 = Jogo.classificacao.getJogador(8);
+			texto.desenha(g, 9 + "  -  " + jog_rank9.getNome() + "   " + jog_rank9.getPontuacao(), 765, 205 + 9*desceY);
+		}
+
+		if (Jogo.classificacao.getTamanho() >= 10){
+			Jogador jog_rank10 = Jogo.classificacao.getJogador(9);
+			texto.desenha(g, 10 + "  -  " + jog_rank10.getNome() + "   " + jog_rank10.getPontuacao(), 765, 205 + 10*desceY);
+		}
+
 	}
 
 

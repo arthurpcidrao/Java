@@ -16,6 +16,10 @@ public class Ranking {
         Collections.sort(ranking);
     }
 
+    public int getTamanho(){
+        return ranking.size();
+    }
+
     public Jogador getJogador(int index){
         return ranking.get(index);
     }
