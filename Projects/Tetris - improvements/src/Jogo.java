@@ -23,6 +23,8 @@ public class Jogo extends JFrame {
 	private BufferedImage buffer;
 	private CenarioPadrao cenario;
 
+	public static Ranking classificacao = new Ranking();
+
 	public enum Tecla {
 		CIMA, BAIXO, ESQUERDA, DIREITA, Z, W, ENTER, ESC, ESPACO
 	}
@@ -138,7 +140,7 @@ public class Jogo extends JFrame {
 				g2d.fillRect(0, 0, JANELA_LARGURA, JANELA_ALTURA);
 
 				if (controleTecla[Tecla.ENTER.ordinal()]) {
-					// Pressionou espaço ou enter
+					// Pressionou enter
 					if (cenario instanceof InicioCenario) {
 						cenario.descarregar();
 						cenario = null;
@@ -159,6 +161,7 @@ public class Jogo extends JFrame {
 
 				} else if (controleTecla[Tecla.ESC.ordinal()]) {
 					// Pressionou ESQ
+					JogoCenario.pontos = 0;
 					if (!(cenario instanceof InicioCenario)) {
 						cenario.descarregar();
 
@@ -186,7 +189,14 @@ public class Jogo extends JFrame {
 						g2d.drawString("Pausado", (tela.getWidth()) / 2 - 4, tela.getHeight() / 2);
 					}
 				}
-
+				// aparentemente deu certo.
+				if (!JogoCenario.nome_rank.equals("")){
+					classificacao.addJogador(JogoCenario.nome_rank, JogoCenario.pontos);
+					classificacao.ordenar();
+					classificacao.imprimeRanking();
+					JogoCenario.nome_rank = "";
+				}
+				
 				tela.repaint();
 				prxAtualizacao = System.currentTimeMillis() + FPS;
 			}

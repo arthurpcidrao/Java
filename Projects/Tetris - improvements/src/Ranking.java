@@ -16,6 +16,10 @@ public class Ranking {
         Collections.sort(ranking);
     }
 
+    public Jogador getJogador(int index){
+        return ranking.get(index);
+    }
+
     public void imprimeRanking(){
         for (Jogador j : ranking){
             j.imprimeJogador();

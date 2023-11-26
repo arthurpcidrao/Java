@@ -35,8 +35,8 @@ public class JogoCenario extends CenarioPadrao {
 
 	private Random rand = new Random();
 
-	private Ranking classificacao = new Ranking();
-	private String nome = "";
+	//private Ranking classificacao = new Ranking();
+	public static String nome_rank = "";  // era PRIVATE e SEM static
 
 	private int idPeca = -1;
 	private int idPrxPeca = -1;
@@ -48,7 +48,7 @@ public class JogoCenario extends CenarioPadrao {
 	private int peca1 = 0, peca2 = 0, peca3 = 0, peca4 = 0, peca5 = 0, peca6 = 0, peca7 = 0;
 
 	private int nivel = Jogo.nivel;
-	private int pontos;
+	public static int pontos;  //era PRIVATE e SEM static
 	private int linhasFeitas;
 
 	private boolean animar;
@@ -542,6 +542,15 @@ public class JogoCenario extends CenarioPadrao {
 		g.drawLine(comecoX+largura, 0, comecoX+largura, altura);
 		g.drawRect(comecoX + largura + 5, 20, 87, 110);
 
+
+		for (int i = 0; i < 10; i++){
+			Jogador jog_rank = Jogo.classificacao.getJogador(i);
+
+			texto.setCor(Color.WHITE);
+			texto.desenha(g, jog_rank.getNome() + "   " + jog_rank.getPontuacao(), 800, 225);
+		}
+
+
 		for (int col = 0; col < grade.length; col++) {
 			for (int lin = 0; lin < grade[0].length; lin++) {
 				int valor = grade[col][lin];
@@ -620,14 +629,7 @@ public class JogoCenario extends CenarioPadrao {
 		texto.desenha(g, "Pontos:   " + String.valueOf(pontos), (comecoX/5), 100);
 
 		// ESTÁ GERANDO VÁRIAS VEZES, COLOCAR UM STOP AI DE ALGUMA FORMA.
-		classificacao.ordenar();
-		classificacao.imprimeRanking();
-
-		/*	
-		for (int i = 0; i < 10; i++){
-			
-		}
-		*/
+		//classificacao.ordenar();
 
 		if (estado != Estado.JOGANDO) {
 			texto.setCor(Color.WHITE);
@@ -636,8 +638,8 @@ public class JogoCenario extends CenarioPadrao {
 				texto.desenha(g, "Deu ruim!", comecoX+215, 250);
 				
 				if (!colocouNome){
-					nome = JOptionPane.showInputDialog("Digite seu nome");
-					classificacao.addJogador(nome, pontos);
+					nome_rank = JOptionPane.showInputDialog("Digite seu nome");
+					//classificacao.addJogador(nome_rank, pontos);
 					colocouNome = true;
 				}
 			}
