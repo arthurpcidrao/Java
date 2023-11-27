@@ -58,7 +58,7 @@ public class JogoCenario extends CenarioPadrao {
 
 	private Estado estado = Estado.JOGANDO;
 	private boolean colocouNome = false;
-	private int comecoX = 250;
+	private int comecoX = 250;  // serve para colocar o jogo onde eu quero que comece
 
 	// Som
 	private AudioInputStream as;
@@ -70,7 +70,7 @@ public class JogoCenario extends CenarioPadrao {
 	private Sequencer seqSomDeFundo;
 
 	public JogoCenario(int largura, int altura) {
-		super(largura-500, altura);
+		super(largura - 500, altura);
 	}
 
 	@Override
@@ -619,8 +619,9 @@ public class JogoCenario extends CenarioPadrao {
 		texto.desenha(g, "  :   " + peca7, 90, 585);
 
 		texto.setCor(Color.WHITE);
-		texto.desenha(g, "Level: " + nivel + "." + linhasFeitas, (comecoX/5), 50);
-		texto.desenha(g, "Pontos:   " + String.valueOf(pontos), (comecoX/5), 100);
+		texto.desenha(g, "Level:     " + nivel, (comecoX/5), 50);
+		texto.desenha(g, "Linhas:   " + linhasFeitas, (comecoX/5), 80);
+		texto.desenha(g, "Pontos:   " + String.valueOf(pontos), (comecoX/5), 110);
 
 
 		if (estado != Estado.JOGANDO) {
