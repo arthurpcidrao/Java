@@ -1,15 +1,15 @@
 import java.io.*;
-import java.util.Scanner;
+//import java.util.Scanner;
 
 public class LeituraDeArquivo {
     public static void main (String[] args) throws IOException {
-        Scanner entrada = new Scanner(System.in);
+        //Scanner input = new Scanner(System.in);
         File arquivo = new File("C:\\Users\\arthu\\OneDrive\\Área de Trabalho\\pasta Teste\\arquivoTeste.txt");
 
         Ranking ranking = new Ranking();
-        ranking.addJogador("arthur", 123);
-        ranking.addJogador("alice", 245);
-        ranking.addJogador("leonardo", 500);
+        //ranking.addJogador("arthur", 123);
+        //ranking.addJogador("alice", 245);
+        //ranking.addJogador("leonardo", 500);
         ranking.ordenar();
 
         if(!arquivo.canRead()){
@@ -23,13 +23,13 @@ public class LeituraDeArquivo {
                 }
             }
         }
-        entrada.close();
+        //input.close();
 
         ranking.limparRanking();
 
         System.out.println("Conteúdo do arquivo após escrita:");
         try (BufferedReader leitor = new BufferedReader(new FileReader(arquivo))) {
-            //String dadosJogador[] = linha.split(' ');
+    
             String linha;
 
             while ((linha = leitor.readLine()) != null) {

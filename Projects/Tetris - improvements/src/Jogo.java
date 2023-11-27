@@ -6,11 +6,14 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
+import java.io.*;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Jogo extends JFrame {
+
+	public static File arquivo = new File("C:\\Users\\arthu\\OneDrive\\Área de Trabalho\\pasta Teste\\arquivoTeste.txt");
   
 	private static final long serialVersionUID = 1L;
 	private static final int FPS = 1000/20;
@@ -68,7 +71,7 @@ public class Jogo extends JFrame {
 		}
 	}
 
-	public static int nivel;
+	public static int nivel = 1;
 
 	public static boolean pausado;
 
@@ -133,6 +136,7 @@ public class Jogo extends JFrame {
 	public void iniciarJogo() {
 		long prxAtualizacao = 0;
 
+
 		while (true) {
 			if (System.currentTimeMillis() >= prxAtualizacao) {
 
@@ -192,12 +196,26 @@ public class Jogo extends JFrame {
 				}
 				// aparentemente deu certo.
 				if (!JogoCenario.nome_rank.equals("")){
+
 					classificacao.addJogador(JogoCenario.nome_rank, JogoCenario.pontos);
-					classificacao.ordenar();
-					classificacao.imprimeRanking();
-					JogoCenario.nome_rank = "";
+					classificacao.ordenar();  //ordeno o arraylist
+
+					if(!arquivo.canRead()){
+						System.out.println("O arquivo não pode ser lido");
+					}else{
+						try (FileWriter escritor = new FileWriter(arquivo, false)) { // o append(segundo argumento) diz se é para adicionar ou sobrescrever.
+							for(int i = 0; i < classificacao.getTamanho(); i++){
+								Jogador dadosJogador = classificacao.getJogador(i);
+								String cadeia = dadosJogador.getNome() + ' ' + dadosJogador.getPontuacao();
+								escritor.write(cadeia + "\n");
+							}
+						} catch (IOException e){
+							e.printStackTrace();
+						}	
+					}
 					
-					//qtde_jogos++;
+					//classificacao.imprimeRanking();
+					JogoCenario.nome_rank = "";
 				}
 				
 				tela.repaint();
@@ -206,8 +224,20 @@ public class Jogo extends JFrame {
 		}
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException{
 		Jogo jogo = new Jogo();
+		// começou a execução, eu venho com a leitura do arquivo.
+		try (BufferedReader leitor = new BufferedReader(new FileReader(arquivo))) {
+    
+            String linha;
+
+            while ((linha = leitor.readLine()) != null) {
+                String dadosJogador[] = linha.split(" ");
+                
+                classificacao.addJogador(dadosJogador[0], Integer.parseInt(dadosJogador[1]));
+            }
+        }
+
 		jogo.carregarJogo();
 		jogo.iniciarJogo();
 	}
