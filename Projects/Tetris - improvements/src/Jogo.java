@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 
 public class Jogo extends JFrame {
 
-	public static File arquivo = new File("C:\\Users\\arthu\\OneDrive\\Área de Trabalho\\pasta Teste\\arquivoTeste.txt");
+	public static File arquivo = new File("C:\\Users\\arthu\\OneDrive\\Área de Trabalho\\Codes\\Java\\Projects\\Tetris - improvements\\Classificacao - jogadores\\Ranking.txt");
   
 	private static final long serialVersionUID = 1L;
 	private static final int FPS = 1000/20;
