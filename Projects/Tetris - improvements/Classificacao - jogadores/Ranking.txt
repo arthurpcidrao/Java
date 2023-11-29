@@ -6,6 +6,7 @@ derek;1636
 nathalino;1455
 guilherme;972
 gilson;349
+arthur p;249
 lucas diniz;185
 arthur;164
 fernando;146

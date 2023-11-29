@@ -47,7 +47,7 @@ public class JogoCenario extends CenarioPadrao {
 	private Color corPeca;
 	private int[][] peca;
 
-	private int peca1 = 0, peca2 = 0, peca3 = 0, peca4 = 0, peca5 = 0, peca6 = 0, peca7 = 0;
+	private int peca1 = 0, peca2 = 0, peca3 = 0, peca4 = 0, peca5 = 0, peca6 = 0, peca7 = 0;  // estatísticas de peças
 
 	private int nivel = Jogo.nivel;
 	public static int pontos;  //era PRIVATE e SEM static
@@ -71,7 +71,7 @@ public class JogoCenario extends CenarioPadrao {
 	private Sequencer seqSomDeFundo;
 
 	public JogoCenario(int largura, int altura) {
-		super(largura - 500, altura);
+		super(largura - 500, altura);  // a sacada da tela normal é aqui junto com a variável "comecoX"
 	}
 
 	@Override
@@ -329,6 +329,8 @@ public class JogoCenario extends CenarioPadrao {
 			idPrxPeca3 = rand.nextInt(Peca.PECAS.length);
 		}
 
+
+		// ESTATÍSTICA DAS PEÇAS ABAIXO:
 		if(idPeca == 0){
 			peca1++;
 			//System.out.printf("peca1 = %d\n", peca1);

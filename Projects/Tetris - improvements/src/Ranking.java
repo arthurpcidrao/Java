@@ -28,7 +28,7 @@ public class Ranking {
         return ranking.get(index);
     }
 
-    public void imprimeRanking(){
+    public void imprimeRanking(){  // método usado para testes no terminal
         for (Jogador j : ranking){
             j.imprimeJogador();
         }

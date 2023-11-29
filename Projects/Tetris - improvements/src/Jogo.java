@@ -19,7 +19,7 @@ public class Jogo extends JFrame {
 	private static final int FPS = 1000/20;
 	private static final int JANELA_ALTURA = 672;
 	public static final int largura_extra = 250;
-	private static final int JANELA_LARGURA = largura_extra + 500 + largura_extra;
+	private static final int JANELA_LARGURA = largura_extra + 500 + largura_extra;  // tamanho da tela com as partes extras
 
 	private JPanel tela;
 	private Graphics2D g2d;
@@ -71,7 +71,7 @@ public class Jogo extends JFrame {
 		}
 	}
 
-	public static int nivel = 1;
+	public static int nivel = 1;  // sempre começa no nível 1
 
 	public static boolean pausado;
 
@@ -195,7 +195,7 @@ public class Jogo extends JFrame {
 					}
 				}
 				// aparentemente deu certo.
-				if (!JogoCenario.nome_rank.equals("")){
+				if (!JogoCenario.nome_rank.equals("")){  // aqui é feito a escrita do arquivo, que só acontece quando coloca um nome
 
 					classificacao.addJogador(JogoCenario.nome_rank, JogoCenario.pontos);
 					classificacao.ordenar();  //ordeno o arraylist
@@ -213,8 +213,6 @@ public class Jogo extends JFrame {
 							e.printStackTrace();
 						}	
 					}
-					
-					//classificacao.imprimeRanking();
 					JogoCenario.nome_rank = "";
 				}
 				

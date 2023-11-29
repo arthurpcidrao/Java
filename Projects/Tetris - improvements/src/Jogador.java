@@ -21,7 +21,7 @@ public class Jogador implements Comparable<Jogador>{
         this.pontuacao = pontuacao;
     }
 
-    public void imprimeJogador(){
+    public void imprimeJogador(){  // método usado para teste no terminal
         System.out.printf("%s %d\n", getNome(), getPontuacao());
     }
 
