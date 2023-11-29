@@ -2,6 +2,7 @@ import java.awt.Graphics2D;
 
 public class InicioCenario extends CenarioPadrao {
 
+	private Texto texto = new Texto(20);
 	public InicioCenario(int largura, int altura) {
 		super(largura, altura);
 	}
@@ -41,6 +42,8 @@ public class InicioCenario extends CenarioPadrao {
 	@Override
 	public void desenhar(Graphics2D g) {
 		menuJogo.desenha(g);
+
+		texto.desenha(g, "Aperte ENTER para iniciar", 378, 400);
 
 	}
 

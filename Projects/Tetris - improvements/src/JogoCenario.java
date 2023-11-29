@@ -62,11 +62,8 @@ public class JogoCenario extends CenarioPadrao {
 
 	// Som
 	private AudioInputStream as;
-
 	private Clip clipAdicionarPeca;
-
 	private Clip clipMarcarLinha;
-
 	private Sequencer seqSomDeFundo;
 
 	public JogoCenario(int largura, int altura) {
@@ -100,7 +97,7 @@ public class JogoCenario extends CenarioPadrao {
 			clipMarcarLinha.open(as);
 
 			seqSomDeFundo = MidiSystem.getSequencer();
-			seqSomDeFundo.setSequence(MidiSystem.getSequence(new File("som/piano_quebrado.mid")));
+			seqSomDeFundo.setSequence(MidiSystem.getSequence(new File("som/The road you use to travel when you were kids.mid")));
 			seqSomDeFundo.open();
 
 			seqSomDeFundo.setLoopCount(Sequencer.LOOP_CONTINUOUSLY);
@@ -220,6 +217,11 @@ public class JogoCenario extends CenarioPadrao {
 
 				} else {
 					estado = Estado.PERDEU;
+					if (seqSomDeFundo != null) {
+						seqSomDeFundo.stop();
+					}
+
+
 				}
 
 			} else
@@ -628,11 +630,13 @@ public class JogoCenario extends CenarioPadrao {
 			texto.setCor(Color.WHITE);
 
 			if (estado == Estado.PERDEU){
+				texto.setCor(Color.GRAY);
 				texto.desenha(g, "Deu ruim!", comecoX+215, 250);
 				
 				if (!colocouNome){
 					nome_rank = JOptionPane.showInputDialog("Digite seu nome");
-					//classificacao.addJogador(nome_rank, pontos);
+
+					JOptionPane.showMessageDialog(null, nome_rank + ", você fez  " + pontos + " pontos", "Jogo concluído", JOptionPane.PLAIN_MESSAGE);
 					colocouNome = true;
 				}
 			}
