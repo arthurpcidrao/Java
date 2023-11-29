@@ -65,6 +65,9 @@ public class JogoCenario extends CenarioPadrao {
 	private Clip clipAdicionarPeca;
 	private Clip clipMarcarLinha;
 	private Clip clipGameOver;
+	private Clip clipViraPeca;
+	private Clip clipMovePeca;
+	private Clip clipDesceTudo;
 	private Sequencer seqSomDeFundo;
 
 	public JogoCenario(int largura, int altura) {
@@ -93,16 +96,28 @@ public class JogoCenario extends CenarioPadrao {
 			clipAdicionarPeca = AudioSystem.getClip();
 			clipAdicionarPeca.open(as);
 
+			as = AudioSystem.getAudioInputStream(new File("som/desceTudo.wav"));
+			clipDesceTudo = AudioSystem.getClip();
+			clipDesceTudo.open(as);
+
+			as = AudioSystem.getAudioInputStream(new File("som/move.wav"));
+			clipMovePeca = AudioSystem.getClip();
+			clipMovePeca.open(as);
+
+			as = AudioSystem.getAudioInputStream(new File("som/viraPeca.wav"));
+			clipViraPeca = AudioSystem.getClip();
+			clipViraPeca.open(as);
+
 			as = AudioSystem.getAudioInputStream(new File("som/game_over.wav"));
 			clipGameOver = AudioSystem.getClip();
 			clipGameOver.open(as);
 
-			as = AudioSystem.getAudioInputStream(new File("som/109662_grunz_success.wav"));
+			as = AudioSystem.getAudioInputStream(new File("som/marcaLinha.wav"));
 			clipMarcarLinha = AudioSystem.getClip();
 			clipMarcarLinha.open(as);
 
 			seqSomDeFundo = MidiSystem.getSequencer();
-			seqSomDeFundo.setSequence(MidiSystem.getSequence(new File("som/The road you use to travel when you were kids.mid")));
+			seqSomDeFundo.setSequence(MidiSystem.getSequence(new File("som/somFundo.mid")));
 			seqSomDeFundo.open();
 
 			seqSomDeFundo.setLoopCount(Sequencer.LOOP_CONTINUOUSLY);
@@ -125,6 +140,16 @@ public class JogoCenario extends CenarioPadrao {
 			clipAdicionarPeca.close();
 		}
 
+		if (clipMovePeca != null) {
+			clipMovePeca.stop();
+			clipMovePeca.close();
+		}
+
+		if (clipViraPeca != null) {
+			clipViraPeca.stop();
+			clipViraPeca.close();
+		}
+
 		if (clipMarcarLinha != null) {
 			clipMarcarLinha.stop();
 			clipMarcarLinha.close();
@@ -139,6 +164,12 @@ public class JogoCenario extends CenarioPadrao {
 			clipGameOver.stop();
 			clipGameOver.close();
 		}
+
+		if (clipDesceTudo != null) {
+			clipDesceTudo.stop();
+			clipDesceTudo.close();
+		}
+
 		//-----------------------------------------------------------------------------//
 	}
 
@@ -154,16 +185,37 @@ public class JogoCenario extends CenarioPadrao {
 			if (validaMovimento(peca, ppx - 1, ppy))
 				ppx--;
 
+				if (clipMovePeca != null) {
+				clipMovePeca.setFramePosition(0);
+				clipMovePeca.start();
+				}
+
 		} else if (Jogo.controleTecla[Jogo.Tecla.DIREITA.ordinal()]) {
 			if (validaMovimento(peca, ppx + 1, ppy))
 				ppx++;
+
+				if (clipMovePeca != null) {
+				clipMovePeca.setFramePosition(0);
+				clipMovePeca.start();
+				}
 		}
 
 		if (Jogo.controleTecla[Jogo.Tecla.CIMA.ordinal()]) {
 			girarReposicionarPeca(true);
+			
+			if (clipViraPeca != null) {
+				clipViraPeca.setFramePosition(0);
+				clipViraPeca.start();
+				}
 
 		} else if (Jogo.controleTecla[Jogo.Tecla.Z.ordinal()]){
 			girarReposicionarPeca(false);
+			clipViraPeca.start();
+
+			if (clipViraPeca != null) {
+				clipViraPeca.setFramePosition(0);
+				clipViraPeca.start();
+				}
 		}
 		
 		if (Jogo.controleTecla[Jogo.Tecla.BAIXO.ordinal()]) {
@@ -184,6 +236,11 @@ public class JogoCenario extends CenarioPadrao {
 					}
 				}
 			}
+			if (clipDesceTudo != null) {
+				clipDesceTudo.setFramePosition(0);
+				clipDesceTudo.start();
+				}
+
 		}
 
 		if (depurar && Jogo.controleTecla[Jogo.Tecla.W.ordinal()]) {
