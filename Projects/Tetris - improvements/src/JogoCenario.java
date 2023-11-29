@@ -418,7 +418,7 @@ public class JogoCenario extends CenarioPadrao {
 		}
 		
 
-		if (linhasFeitas >= 9) { // ORIGINAL É 9... voltar pra 9
+		if (linhasFeitas > 9) { // ORIGINAL É 9... voltar pra 9
 			nivel++;
 			linhasFeitas = 0;
 		}
@@ -651,8 +651,8 @@ public class JogoCenario extends CenarioPadrao {
 				imprimePosicoes(i, g);
 			}
 		}
-	
-
+		texto.desenha(g, "||------------------------------||", 755, 490);
+		texto.desenha(g, "Aperte ESC para retornar", 760, 600);
 	}
 
 
