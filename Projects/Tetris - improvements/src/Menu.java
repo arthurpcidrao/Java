@@ -13,12 +13,8 @@ public class Menu extends Texto {
 
 		this.rotulo = rotulo;
 		setLargura(120);
-		setAltura(20);
+		setAltura(10);
 		setCor(Color.WHITE);
-	}
-
-	public void addOpcoes(String... opcao) {
-		opcoes = opcao;
 	}
 
 	@Override

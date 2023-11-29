@@ -43,7 +43,7 @@ public class InicioCenario extends CenarioPadrao {
 	public void desenhar(Graphics2D g) {
 		menuJogo.desenha(g);
 
-		texto.desenha(g, "Aperte ENTER para iniciar", 378, 400);
+		texto.desenha(g, "Aperte ENTER para iniciar", 378, 600);
 
 	}
 
