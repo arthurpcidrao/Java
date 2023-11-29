@@ -64,6 +64,7 @@ public class JogoCenario extends CenarioPadrao {
 	private AudioInputStream as;
 	private Clip clipAdicionarPeca;
 	private Clip clipMarcarLinha;
+	private Clip clipGameOver;
 	private Sequencer seqSomDeFundo;
 
 	public JogoCenario(int largura, int altura) {
@@ -91,6 +92,10 @@ public class JogoCenario extends CenarioPadrao {
 			as = AudioSystem.getAudioInputStream(new File("som/adiciona_peca.wav"));
 			clipAdicionarPeca = AudioSystem.getClip();
 			clipAdicionarPeca.open(as);
+
+			as = AudioSystem.getAudioInputStream(new File("som/game_over.wav"));
+			clipGameOver = AudioSystem.getClip();
+			clipGameOver.open(as);
 
 			as = AudioSystem.getAudioInputStream(new File("som/109662_grunz_success.wav"));
 			clipMarcarLinha = AudioSystem.getClip();
@@ -128,6 +133,11 @@ public class JogoCenario extends CenarioPadrao {
 		if (seqSomDeFundo != null) {
 			seqSomDeFundo.stop();
 			seqSomDeFundo.close();
+		}
+
+		if (clipGameOver != null) {
+			clipGameOver.stop();
+			clipGameOver.close();
 		}
 		//-----------------------------------------------------------------------------//
 	}
@@ -219,6 +229,7 @@ public class JogoCenario extends CenarioPadrao {
 					estado = Estado.PERDEU;
 					if (seqSomDeFundo != null) {
 						seqSomDeFundo.stop();
+						clipGameOver.start();
 					}
 
 
@@ -418,7 +429,7 @@ public class JogoCenario extends CenarioPadrao {
 		}
 		
 
-		if (linhasFeitas > 9) { // ORIGINAL É 9... voltar pra 9
+		if (linhasFeitas >= 9) { // ORIGINAL É 9... voltar pra 9
 			nivel++;
 			linhasFeitas = 0;
 		}

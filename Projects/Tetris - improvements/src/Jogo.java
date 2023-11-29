@@ -206,7 +206,7 @@ public class Jogo extends JFrame {
 						try (FileWriter escritor = new FileWriter(arquivo, false)) { // o append(segundo argumento) diz se é para adicionar ou sobrescrever.
 							for(int i = 0; i < classificacao.getTamanho(); i++){
 								Jogador dadosJogador = classificacao.getJogador(i);
-								String cadeia = dadosJogador.getNome() + ' ' + dadosJogador.getPontuacao();
+								String cadeia = dadosJogador.getNome() + ';' + dadosJogador.getPontuacao();
 								escritor.write(cadeia + "\n");
 							}
 						} catch (IOException e){
@@ -232,7 +232,7 @@ public class Jogo extends JFrame {
             String linha;
 
             while ((linha = leitor.readLine()) != null) {
-                String dadosJogador[] = linha.split(" ");
+                String dadosJogador[] = linha.split(";");
                 
                 classificacao.addJogador(dadosJogador[0], Integer.parseInt(dadosJogador[1]));
             }

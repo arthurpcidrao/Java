@@ -1,22 +1,29 @@
-arthur 7211
-arthur 5166
-arthur 3909
-arthur 2629
-derek 1636
-nathalino 1455
-arthur 164
-fernando 146
-evandro 136
-leonardo 130
-arthur 118
-alice 115
-jane 114
-alice 112
-gilson 112
-arthur 103
-bruna 100
-arthur 96
-bruno 95
-lucas 92
-andre 90
-lucas 88
+arthur;7211
+arthur;5166
+arthur;3909
+arthur;2629
+derek;1636
+nathalino;1455
+guilherme;972
+gilson;349
+lucas diniz;185
+arthur;164
+fernando;146
+evandro;136
+leonardo;130
+gilson;123
+arthur;118
+alice;115
+jane;114
+alice;112
+gilson;112
+zerei;107
+zero;104
+arthur;103
+bruna;100
+arthur;96
+bruno;95
+zara;93
+lucas;92
+andre;90
+lucas;88
