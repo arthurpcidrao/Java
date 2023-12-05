@@ -704,6 +704,7 @@ public class JogoCenario extends CenarioPadrao {
 				texto.desenha(g, "Deu ruim!", comecoX+215, 250);
 				
 				if (!colocouNome){
+
 					nome_rank = JOptionPane.showInputDialog("Digite seu nome");
 
 					JOptionPane.showMessageDialog(null, nome_rank + ", você fez  " + pontos + " pontos", "Jogo concluído", JOptionPane.PLAIN_MESSAGE);

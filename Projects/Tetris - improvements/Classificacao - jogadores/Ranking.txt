@@ -1,9 +1,12 @@
+LucasDF;15532
 arthur;7211
 arthur;5166
 arthur;3909
 arthur;2629
+Gilson;2126
 derek;1636
 nathalino;1455
+braule;1118
 guilherme;972
 gilson;349
 arthur p;249
@@ -28,3 +31,4 @@ zara;93
 lucas;92
 andre;90
 lucas;88
+;0
