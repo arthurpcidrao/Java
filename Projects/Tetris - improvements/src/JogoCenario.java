@@ -47,8 +47,7 @@ public class JogoCenario extends CenarioPadrao {
 	private Color corPeca;
 	private int[][] peca;
 
-	private int peca1 = 0, peca2 = 0, peca3 = 0, peca4 = 0, peca5 = 0, peca6 = 0, peca7 = 0;  // estatísticas de peças
-
+	private int estPecas[] = new int[7];
 	private int nivel = Jogo.nivel;
 	public static int pontos;  //era PRIVATE e SEM static
 	private int linhasFeitas;
@@ -66,7 +65,6 @@ public class JogoCenario extends CenarioPadrao {
 	private Clip clipMarcarLinha;
 	private Clip clipGameOver;
 	private Clip clipViraPeca;
-	private Clip clipMovePeca;
 	private Clip clipDesceTudo;
 	private Sequencer seqSomDeFundo;
 
@@ -99,10 +97,6 @@ public class JogoCenario extends CenarioPadrao {
 			as = AudioSystem.getAudioInputStream(new File("som/desceTudo.wav"));
 			clipDesceTudo = AudioSystem.getClip();
 			clipDesceTudo.open(as);
-
-			as = AudioSystem.getAudioInputStream(new File("som/move.wav"));
-			clipMovePeca = AudioSystem.getClip();
-			clipMovePeca.open(as);
 
 			as = AudioSystem.getAudioInputStream(new File("som/viraPeca.wav"));
 			clipViraPeca = AudioSystem.getClip();
@@ -138,11 +132,6 @@ public class JogoCenario extends CenarioPadrao {
 		if (clipAdicionarPeca != null) {
 			clipAdicionarPeca.stop();
 			clipAdicionarPeca.close();
-		}
-
-		if (clipMovePeca != null) {
-			clipMovePeca.stop();
-			clipMovePeca.close();
 		}
 
 		if (clipViraPeca != null) {
@@ -185,19 +174,9 @@ public class JogoCenario extends CenarioPadrao {
 			if (validaMovimento(peca, ppx - 1, ppy))
 				ppx--;
 
-				if (clipMovePeca != null) {
-				clipMovePeca.setFramePosition(0);
-				clipMovePeca.start();
-				}
-
 		} else if (Jogo.controleTecla[Jogo.Tecla.DIREITA.ordinal()]) {
 			if (validaMovimento(peca, ppx + 1, ppy))
 				ppx++;
-
-				if (clipMovePeca != null) {
-				clipMovePeca.setFramePosition(0);
-				clipMovePeca.start();
-				}
 		}
 
 		if (Jogo.controleTecla[Jogo.Tecla.CIMA.ordinal()]) {
@@ -331,29 +310,7 @@ public class JogoCenario extends CenarioPadrao {
 
 
 		// ESTATÍSTICA DAS PEÇAS ABAIXO:
-		if(idPeca == 0){
-			peca1++;
-			//System.out.printf("peca1 = %d\n", peca1);
-		} else if(idPeca == 1){
-			peca2++;
-			//System.out.printf("peca2 = %d\n", peca2);
-		} else if(idPeca == 2){
-			peca3++;
-			//System.out.printf("peca3 = %d\n", peca3);
-		}
-		else if(idPeca == 3){
-			peca4++;
-			//System.out.printf("peca4 = %d\n", peca4);
-		}
-		else if(idPeca == 4){
-			peca5++;
-		}
-		else if(idPeca == 5){
-			peca6++;
-		}
-		else if(idPeca == 6){
-			peca7++;
-		}
+		estPecas[idPeca]++;
 
 		peca = Peca.PECAS[idPeca];
 		corPeca = Peca.Cores[idPeca];
@@ -682,13 +639,13 @@ public class JogoCenario extends CenarioPadrao {
 		desenhaPeca(4, Peca.PECAS[6], 6, g, 50, 560, 0);
 		
 		texto.setCor(Color.WHITE);
-		texto.desenha(g, "  :   " + peca1, 90, 225);
-		texto.desenha(g, "  :   " + peca2, 90, 285);
-		texto.desenha(g, "  :   " + peca3, 90, 345);
-		texto.desenha(g, "  :   " + peca4, 90, 405);
-		texto.desenha(g, "  :   " + peca5, 90, 465);
-		texto.desenha(g, "  :   " + peca6, 90, 525);
-		texto.desenha(g, "  :   " + peca7, 90, 585);
+		texto.desenha(g, "  :   " + estPecas[0], 90, 225);
+		texto.desenha(g, "  :   " + estPecas[1], 90, 285);
+		texto.desenha(g, "  :   " + estPecas[2], 90, 345);
+		texto.desenha(g, "  :   " + estPecas[3], 90, 405);
+		texto.desenha(g, "  :   " + estPecas[4], 90, 465);
+		texto.desenha(g, "  :   " + estPecas[5], 90, 525);
+		texto.desenha(g, "  :   " + estPecas[6], 90, 585);
 
 		texto.setCor(Color.WHITE);
 		texto.desenha(g, "Level:     " + nivel, (comecoX/5), 50);
