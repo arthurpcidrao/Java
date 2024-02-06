@@ -13,18 +13,18 @@ public class App {
 
         input.close();
         
-        System.out.printf("O maior valor do vetor é: %d", valorMax(vetor, vetor.length - 1, 0));
+        System.out.printf("O maior valor do vetor é: %d", valorMax(vetor, vetor.length - 1, vetor[9]));
     }
 
-    public static int valorMax(int vetor[], int i, int soma){
+    public static int valorMax(int vetor[], int i, int maiorValor){
         if (i >= 0){
-            if (vetor[i] > 0){
-                soma = soma + vetor[i];
+            if (maiorValor < vetor[i]){
+                maiorValor = vetor[i];
             }
-            return valorMax(vetor, i-1, soma);
+            return valorMax(vetor, i-1, maiorValor);
         }
         else{
-            return soma;
+            return maiorValor;
         }
     }
 }
