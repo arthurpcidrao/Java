@@ -11,7 +11,6 @@ public class App {
         permuta("", conjunto);
         }
 
-
     public static void permuta(String p, String q){
 
         if(q.length() == 0){
