@@ -6,28 +6,21 @@ public class App {
         
         System.out.print("Digite o conjunto a analisar: ");
         
-        String conjunto = input.nextLine();
-        char letras[] = conjunto.toCharArray();  // converte o conjunto em um vetor de letras do conjunto
-
+        String conjunto = input.next();
         input.close();
-
-        perm(letras, 0, letras.length - 1);
-    }
-
-    public static void perm(char letras[], int inicio, int fim){
-        
-    }
-
-    public static void troca(char letras[], int a, int b){
-        char cte = letras[a];
-        letras[a] = letras[b];
-        letras[b] = cte;
-    }
-
-    public static void imprimePerm(char letras[]){
-        for (int i = 0; i < letras.length - 1; i++){
-            System.out.print(letras[i]);
+        permuta("", conjunto);
         }
-        System.out.println();
+
+
+    public static void permuta(String p, String q){
+
+        if(q.length() == 0){
+            System.out.println(p);
+        }
+        else{
+            for (int i = 0; i < q.length(); i++){
+                permuta(p + q.charAt(i), q.substring(0, i) + q.substring(i+1, q.length()));
+            }
+        }        
     }
 }
