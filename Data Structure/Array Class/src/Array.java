@@ -2,11 +2,12 @@ public class Array {
     
     //attributes
     private Object array[];
-    private int size = 0;
+    private int size;
 
     // methods
     public Array(int capacity){
         this.array = new Object[capacity];
+        this.size = 0;
     }
 
     public void add(Object unit){
@@ -58,6 +59,32 @@ public class Array {
             }
         }
         return false;
+    }
+
+    public int howMany(Object unit){
+        int count = 0;
+        
+        for (int i = 0; i < this.size; i++){
+            if(this.array[i].equals(unit)){
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public void remove(Object unit){
+        int pos = 0;
+        boolean exists = false;
+        for (int i = 0; i < this.size; i++){
+            if(this.array[i].equals(unit)){
+                pos = i;
+                exists = true;
+                break;
+            }
+        }
+        if(exists){
+            remove(pos);
+        }
     }
 
     public void remove(int pos){

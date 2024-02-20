@@ -8,14 +8,17 @@ public class ArrayClass {
         // essa classe ainda está aceitando um vetor com tipos variados
         // isso não é natural de uma estrutura de dados... resolver isso com o type[].
 
-        vetor.add("arthur");
+        vetor.add("a");
         vetor.add("b");
         vetor.add("c");
-        vetor.add("d");
+        vetor.add("a");
         vetor.add("e");
         vetor.add("f");
         vetor.add("g");
-        vetor.add("h");
+        vetor.add("a");
+        vetor.add("i");
+        vetor.add("j");
+        vetor.add("k");
         vetor.print();
         System.out.println(vetor.size());
 
@@ -23,9 +26,13 @@ public class ArrayClass {
 
         //vetor.add("alice",1);
         
-        vetor.remove(3);
+        vetor.remove(2);
         vetor.print();
         System.out.println(vetor.size());
+        System.out.println(vetor.howMany("a"));
+        vetor.remove("a");
+        vetor.print();
+        
         input.close();
     }
 }
