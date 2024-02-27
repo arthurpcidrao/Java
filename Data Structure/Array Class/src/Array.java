@@ -1,16 +1,17 @@
-public class Array {
+public class Array<T extends Comparable<T>> {
     
     //attributes
-    private Object array[];
+    public T array[];
     private int size;
 
     // methods
-    public Array(int capacity){
-        this.array = new Object[capacity];
+    @SuppressWarnings("unchecked")
+    public Array(){ // constructor
+        this.array = (T[]) new Object[8];
         this.size = 0;
     }
 
-    public void add(Object unit){
+    public void add(T unit){
         if(this.size == this.array.length){
             extraSpace();
         }
@@ -18,7 +19,7 @@ public class Array {
         this.size++;
     }
 
-    public void add(Object unit, int pos){
+    public void add(T unit, int pos){
         // pos >= 0
         if(this.size == this.array.length){
             extraSpace();
@@ -32,8 +33,9 @@ public class Array {
         }
     }
 
-    public void extraSpace(){
-        Object newArray[] = new Object[2*this.array.length];
+    @SuppressWarnings("unchecked")
+    private void extraSpace(){
+        T newArray[] = (T[])new Object[2*this.array.length];
         for(int i = 0; i < this.array.length; i++){
             newArray[i] = this.array[i];
         }
@@ -45,14 +47,14 @@ public class Array {
         return this.size;
     }
 
-    public Object getUnit(int i){
+    public T getUnit(int i){
         if (i >= 0 && i < this.size){
             return this.array[i];
         }
         return null;
     }
 
-    public boolean exists(Object unit){
+    public boolean exists(T unit){
         for (int i = 0; i < this.size; i++){
             if(this.array[i].equals(unit)){
                 return true;
@@ -61,7 +63,7 @@ public class Array {
         return false;
     }
 
-    public int howMany(Object unit){
+    public int howMany(T unit){
         int count = 0;
         
         for (int i = 0; i < this.size; i++){
@@ -72,7 +74,7 @@ public class Array {
         return count;
     }
 
-    public void remove(Object unit){
+    public void remove(T unit){
         int pos = 0;
         boolean exists = false;
         for (int i = 0; i < this.size; i++){
@@ -94,10 +96,33 @@ public class Array {
         this.size--;
     }
 
+    public void remove(){
+        this.size = this.size - 1;
+    }
+
+    @SuppressWarnings("unchecked")
+    public void clear(){
+        this.size = 0;
+        T newArray[] = (T[]) new Object[8];
+        this.array = newArray;
+    }
+
+    public void sort(){
+        for (int i = 0; i < this.size - 1; i++){
+            for (int j = 0; j < this.size; j++){
+                if (this.array[i].compareTo(this.array[j]) > 0){
+                    T cte = this.array[i];
+                    this.array[i] = this.array[j];
+                    this.array[j] = cte;
+                }
+            }
+        }
+    }
+
     public void print(){
         System.out.print("[");
         if(this.size == 1){
-            System.out.printf("%s", this.array[0]);
+            System.out.print(this.array[0]);
         }
         else{
             for (int i = 0; i < this.size; i++){
@@ -112,6 +137,4 @@ public class Array {
         }
         System.out.println("]");
     }
-
-
 }
