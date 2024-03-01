@@ -24,9 +24,9 @@ public class App {
 
     }
 
-    public static void sortFast(long vetor[]){
+    public static void sortFast(long array[]){
         
-        int len = vetor.length;
+        int len = array.length;
         if (len < 2){
             return;
         }
@@ -35,41 +35,41 @@ public class App {
         long right[] = new long[len - len/2];
 
         for (int i = 0; i < (len/2); i++){
-            left[i] = vetor[i];
+            left[i] = array[i];
         }
-        for (int i = (len/2); i < vetor.length; i++){
-            right[i - left.length] = vetor[i];
+        for (int i = (len/2); i < array.length; i++){
+            right[i - left.length] = array[i];
         }
 
         sortFast(left);
         sortFast(right);
 
-        sortFinish(vetor,left,right);
+        sortFinish(array,left,right);
     }
 
-    public static void sortFinish(long vetor[], long left[], long right[]){
+    public static void sortFinish(long array[], long left[], long right[]){
         int i = 0, j = 0, k = 0;
 
         while(i < left.length && j < right.length){
             if (left[i] < right[j]){
-                vetor[k] = left[i];
+                array[k] = left[i];
                 i++;
             }
             else {
-                vetor[k] = right[j];
+                array[k] = right[j];
                 j++;
             }
             k++;
         }
 
         while(i < left.length){
-            vetor[k] = left[i];
+            array[k] = left[i];
             i++;
             k++;
         }
 
         while(j < right.length){
-            vetor[k] = right[j];
+            array[k] = right[j];
             j++;
             k++;
         }
