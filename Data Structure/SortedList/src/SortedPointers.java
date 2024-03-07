@@ -1,19 +1,19 @@
-public class LinkedPointers<T extends Comparable<T>> {
+public class SortedPointers<T extends Comparable<T>> {
     
     @SuppressWarnings("rawtypes")    
-    private Node first;
+    private Node first = null;
 
     @SuppressWarnings("rawtypes")
     private Node last = null;
 
     private int size;
 
-    public LinkedPointers(){
+    public SortedPointers(){
         this.last = null;
         this.size = 0;
     }
 
-    @SuppressWarnings({ "rawtypes"})
+    @SuppressWarnings({ "rawtypes", "unchecked"})
     public void add(T unit){
         Node newNode = new Node<>(unit);
 
@@ -21,27 +21,33 @@ public class LinkedPointers<T extends Comparable<T>> {
             this.first = newNode;
             this.last = newNode;
         }
-        else{
+        else if (((T)newNode.getData()).compareTo((T)this.first.getData()) < 0){
+            newNode.setNext(this.first);
+            this.first.setPrevious(newNode);
+            this.first = newNode;
+        }
+        else if (((T)newNode.getData()).compareTo((T)this.last.getData()) >= 0){
             this.last.setNext(newNode);
             newNode.setPrevious(this.last);
             this.last = newNode;
         }
-        this.size++;
-    }
-
-    @SuppressWarnings({ "rawtypes"})
-    public void add(T unit, int pos){
-        Node aux = this.first;
-        Node middle = new Node<>(unit);
-
-        if (pos >= 0 && pos <= this.size){
-            for (int i = 0; i < pos-1; i++){
+        else{
+            Node aux = this.first;
+            while(((T)newNode.getData()).compareTo((T)aux.getData()) >= 0){
                 aux = aux.getNext();
             }
-            middle.setNext(aux.getNext()); // introduzindo o nó que liga o meio com o fim
-            aux.setNext(middle); // colocando o começo com o meio
-            this.size++;
+            // conectando o novo elemento ao conjunto
+            newNode.setPrevious(aux.getPrevious());
+            newNode.setNext(aux);
+
+            // conectando a primeira parte da lista ao novo elemento
+            aux.getPrevious().setNext(newNode);
+
+            // conectando a segunda parte da lista ao novo elemento
+            aux.setPrevious(newNode);
         }
+
+        this.size++;
     }
 
     public int size(){
@@ -134,7 +140,7 @@ public class LinkedPointers<T extends Comparable<T>> {
                 System.out.print(aux.getData());
             }
             else{
-                System.out.print(aux.getData() + ", ");
+                System.out.print(aux.getData() + " ");
             }
             aux = aux.getNext();
         }

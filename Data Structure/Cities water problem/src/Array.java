@@ -1,13 +1,13 @@
 public class Array<T extends Comparable<T>> {
     
     //attributes
-    private Object array[];
+    private T array[];
     private int size;
 
     // methods
     @SuppressWarnings("unchecked")
     public Array(){ // constructor
-        this.array = (T[]) new Object[8];
+        this.array = (T[]) new Comparable[8];
         this.size = 0;
     }
 
@@ -35,7 +35,7 @@ public class Array<T extends Comparable<T>> {
 
     @SuppressWarnings("unchecked")
     private void extraSpace(){
-        Object newArray[] = (T[])new Object[2*this.array.length];
+        T newArray[] = (T[])new Comparable[2*this.array.length];
         for(int i = 0; i < this.array.length; i++){
             newArray[i] = this.array[i];
         }
@@ -47,10 +47,9 @@ public class Array<T extends Comparable<T>> {
         return this.size;
     }
 
-    @SuppressWarnings("unchecked")
     public T getUnit(int i){
         if (i >= 0 && i < this.size){
-            return (T) this.array[i];
+            return this.array[i];
         }
         return null;
     }
@@ -103,16 +102,16 @@ public class Array<T extends Comparable<T>> {
 
     @SuppressWarnings("unchecked")
     public void clear(){
-        this.array = (T[]) new Object[8];
         this.size = 0;
+        T newArray[] = (T[]) new Comparable[8];
+        this.array = newArray;
     }
 
-    @SuppressWarnings("unchecked")
     public void sort(){
         for (int i = 0; i < this.size - 1; i++){
             for (int j = i + 1; j < this.size; j++){
-                if (((T)this.array[i]).compareTo((T)this.array[j]) > 0){
-                    Object temp = this.array[i];
+                if (this.array[i].compareTo(this.array[j]) > 0){
+                    T temp = this.array[i];
                     this.array[i] = this.array[j];
                     this.array[j] = temp;
                 }

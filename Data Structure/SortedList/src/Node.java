@@ -9,7 +9,7 @@ public class Node<T> {
     private Node previous;
 
 
-    
+
     public Node(T data){
         this.data = data;
         this.next = null;
@@ -49,5 +49,4 @@ public class Node<T> {
     public void setPrevious(Node previous){
         this.previous = previous;
     }
-
 }
