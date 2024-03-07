@@ -9,6 +9,11 @@ public class Main {
         array.add(1);
 
         array.print();
+
+        array.remove();
+
+        array.add(8);
+        array.print();
     }
 }
 

@@ -21,6 +21,8 @@ public class LinkedClass {
         System.out.println(array.exists(123));
         array.remove(3);
         array.print();
+        array.add(45);
+        array.print();
 
         
         input.close();

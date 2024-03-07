@@ -96,17 +96,9 @@ public class SortedPointers<T extends Comparable<T>> {
         return count;
     }
 
-    @SuppressWarnings("rawtypes")
     public void remove(){
-        Node aux = this.first;
-
-        for (int i = 0; i < this.size; i++){
-            if (i == this.size - 2){
-                aux.setNext(null);
-                break;
-            }
-            aux = aux.getNext();
-        }
+        this.last.getPrevious().setNext(null);
+        this.last = this.last.getPrevious();
         this.size--;
     }
 
@@ -119,12 +111,14 @@ public class SortedPointers<T extends Comparable<T>> {
                 aux = aux.getNext();
             }
             aux.setNext(aux.getNext().getNext());
+            aux.getNext().getNext().setPrevious(aux.getPrevious().getPrevious());  // verificar
             this.size--;    
         }
     }
 
     public void clear(){
         this.first = null;
+        this.last = null;
         this.size = 0;
     }
 
