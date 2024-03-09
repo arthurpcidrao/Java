@@ -24,6 +24,9 @@ public class LinkedClass {
         array.add(45);
         array.print();
 
+        array.remove((Integer)213);
+        array.print();
+
         
         input.close();
     }

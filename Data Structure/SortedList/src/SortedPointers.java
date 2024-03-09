@@ -111,8 +111,27 @@ public class SortedPointers<T extends Comparable<T>> {
                 aux = aux.getNext();
             }
             aux.setNext(aux.getNext().getNext());
-            aux.getNext().getNext().setPrevious(aux.getPrevious().getPrevious());  // verificar
+            aux.getNext().getNext().setPrevious(aux.getPrevious().getPrevious());
             this.size--;    
+        }
+    }
+
+    @SuppressWarnings("rawtypes")
+    public void remove(T unit){
+        Node aux = this.first;
+        boolean exists = false;
+        int pos = 0;
+
+        for (int i = 0; i < this.size; i++){
+            if (unit.equals(aux.getData())){
+                pos = i;
+                exists = true;
+                break;
+            }
+            aux = aux.getNext();
+        }
+        if(exists){
+            remove(pos);
         }
     }
 
