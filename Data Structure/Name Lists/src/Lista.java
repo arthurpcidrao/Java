@@ -13,27 +13,34 @@ public class Lista {
         }
     }
 
-    public void result(){ // verificar esse método
-
-        int len = list.size();
-        int num = 0;
-        while(num <= len){
+    public void result(){
         
-            int tam = 2;
-            for (int i = tam; i <= 19; i++){
-                int j = 0;
-                while(j < list.size()){
-
+        SortedPointers<Name> line = new SortedPointers<>();
+        
+        int num = list.size();
+        while(num > 0){
+    
+            for (int i = 2; i <=19; i++){
+                for (int j = 0; j < list.size(); j++){
                     if (list.getUnit(j).getSize() == i){
-                        System.out.print(list.getUnit(j).getName() + ", ");
-                        list.remove(list.getUnit(j));
-                        num++;
+                        Name nome = new Name(list.getUnit(j).getName());
+                        line.add(nome);
+                        list.getUnit(j).setName("");
+                        num--;
                         break;
                     }
-                    j++;
                 }
             }
-            System.out.println();
+            
+            for (int i = 0; i < line.size(); i++){
+                if (i == line.size() - 1){
+                    System.out.println(line.getUnit(i).getName());
+                }
+                else{
+                    System.out.print(line.getUnit(i).getName() + ", ");
+                }
+            }
+            line.clear();
         }
     }
 }

@@ -114,25 +114,30 @@ public class SortedPointers<T extends Comparable<T>> {
     public void remove(int pos){
         Node aux = this.first;
 
-        if (pos == 0 && this.first != null){
+        if (this.first == null){
+            return;
+        }
+
+        if (pos == 0){
             this.first = aux.getNext();
-            this.first.setPrevious(null);
+            if (this.first != null){
+                this.first.setPrevious(null);
+            }
             this.size--;
         }
 
-        else if ((pos >= 1) && (pos <= this.size - 2) && (this.size >= 3) && (this.first != null)){
+        else if ((pos > 0) && (pos <= this.size - 2) && (this.size > 2)){
             for (int i = 0; i < pos - 1; i++){
                 aux = aux.getNext();
             }
-
             aux.setNext(aux.getNext().getNext());
             if (aux.getNext() != null && aux.getNext().getNext() != null) {
                 aux.getNext().getNext().setPrevious(aux);
             }
-            this.size--;    
+            this.size--;
         }
 
-        else if (pos == this.size - 1 && this.size >= 2 && this.first != null){
+        else if ((pos == this.size - 1) && (this.size > 1)){
             remove();
         }
     }
@@ -157,7 +162,7 @@ public class SortedPointers<T extends Comparable<T>> {
     }
 
     public void clear(){
-        this.first = null;
+        //this.first = null;
         this.last = null;
         this.size = 0;
     }

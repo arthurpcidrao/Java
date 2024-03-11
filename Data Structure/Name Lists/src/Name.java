@@ -12,6 +12,11 @@ public class Name implements Comparable<Name>{
         return this.name;
     }
 
+    public void setName(String name){
+        this.name = name;
+        this.size = name.length();
+    }
+
     public int getSize(){
         return this.size;
     }
