@@ -67,13 +67,13 @@ public class SortedPointers<T extends Comparable<T>> {
         return null;
     }
 
-    @SuppressWarnings("rawtypes")
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     public boolean exists(T unit){
         
         Node aux = this.first;
 
         for (int i = 0; i < this.size; i++){
-            if (aux.getData().equals(unit)){
+            if (((Comparable<T>) aux.getData()).compareTo(unit) == 0){
                 return true;
             }
             aux = aux.getNext();

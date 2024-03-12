@@ -10,13 +10,13 @@ public class Main {
         for (int i = 0; i < num; i++){
             ShoppingList list = new ShoppingList();
             
-            while(true){
-                String object = input.next();
-                if (object.isEmpty()){
-                    break;
-                }
-                list.add(object);
+            String object = input.nextLine();
+            String marketList[] = object.split(" ");
+            
+            for (int j = 0; j < marketList.length; j++){
+                list.add(marketList[j]);
             }
+            list.print();
         }
 
         input.close();

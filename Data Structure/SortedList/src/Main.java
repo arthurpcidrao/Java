@@ -17,7 +17,7 @@ public class Main {
         array.add(4);
         array.add(5);
         array.add(6);
-        array.print();
+        array.print();  
 
 
         array.remove(3);
