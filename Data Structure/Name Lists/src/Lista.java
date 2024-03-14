@@ -25,7 +25,8 @@ public class Lista {
                     if (list.getUnit(j).getSize() == i){
                         Name nome = new Name(list.getUnit(j).getName());
                         line.add(nome);
-                        list.getUnit(j).setName("");
+                        //list.getUnit(j).setName("");
+                        list.remove(j);
                         num--;
                         break;
                     }
