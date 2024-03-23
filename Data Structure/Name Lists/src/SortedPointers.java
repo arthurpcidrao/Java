@@ -1,6 +1,6 @@
 public class SortedPointers<T extends Comparable<T>> {
-    
-    @SuppressWarnings("rawtypes")    
+
+    @SuppressWarnings("rawtypes")
     private Node first = null;
 
     @SuppressWarnings("rawtypes")
@@ -9,6 +9,7 @@ public class SortedPointers<T extends Comparable<T>> {
     private int size;
 
     public SortedPointers(){
+        this.first = null;
         this.last = null;
         this.size = 0;
     }
@@ -54,6 +55,21 @@ public class SortedPointers<T extends Comparable<T>> {
         return this.size;
     }
 
+    @SuppressWarnings({ "rawtypes", "unlikely-arg-type" })
+    public int getIndex(T unit){
+        Node aux = this.first;
+        int index = 0;
+
+        for (int i = 0; i < this.size; i++){
+            if ((aux).equals(unit)){
+                index = i;
+            }
+            aux = aux.getNext();
+        }
+
+        return index;
+    }
+
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public T getUnit(int num){
         Node aux = this.first;
@@ -67,18 +83,18 @@ public class SortedPointers<T extends Comparable<T>> {
         return null;
     }
 
-    @SuppressWarnings("rawtypes")
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     public boolean exists(T unit){
-        
+
         Node aux = this.first;
 
         for (int i = 0; i < this.size; i++){
-            if (aux.getData().equals(unit)){
+            if (((Comparable<T>) aux.getData()).compareTo(unit) == 0){
                 return true;
             }
             aux = aux.getNext();
         }
-        
+
         return false;
     }
 
@@ -97,49 +113,50 @@ public class SortedPointers<T extends Comparable<T>> {
     }
 
     public void remove(){
-        if (this.first != null && this.size == 1){
-            this.first = null;
-            this.last = null;
-            this.size--;
-        }
-
-        else if (this.first != null && this.size > 1){
-            this.last.getPrevious().setNext(null);
-            this.last = this.last.getPrevious();
-            this.size--;
+        if (this.first != null){
+            if (this.size == 1){
+                clear();
+            }
+            else{
+                this.last.getPrevious().setNext(null);
+                this.last = this.last.getPrevious();
+                this.size--;
+            }
         }
     }
 
     @SuppressWarnings("rawtypes")
     public void remove(int pos){
-        Node aux = this.first;
+        
+        if (pos >= 0 && pos < this.size){
 
-        if (this.first == null){
-            return;
-        }
-
-        if (pos == 0){
-            this.first = aux.getNext();
             if (this.first != null){
-                this.first.setPrevious(null);
-            }
-            this.size--;
-        }
+                Node aux = this.first;
 
-        else if ((pos > 0) && (pos <= this.size - 2) && (this.size > 2)){
-            for (int i = 0; i < pos - 1; i++){
-                aux = aux.getNext();
+                if (this.size == 1){
+                    clear();
+                }
+                else{
+                    if (pos == 0){
+                        this.first.getNext().setPrevious(null);
+                        this.first = this.first.getNext();
+                        this.size--;
+                    }
+                    else if (pos == this.size - 1){
+                        remove();
+                    }
+                    else{
+                        for (int i = 0; i < pos - 1; i++){
+                            aux = aux.getNext();
+                        }
+                        aux.getNext().getNext().setPrevious(aux);
+                        aux.setNext(aux.getNext().getNext());
+                        this.size--;
+                    }
+                }
             }
-            aux.setNext(aux.getNext().getNext());
-            if (aux.getNext() != null && aux.getNext().getNext() != null) {
-                aux.getNext().getNext().setPrevious(aux);
-            }
-            this.size--;
         }
-
-        else if ((pos == this.size - 1) && (this.size > 1)){
-            remove();
-        }
+            
     }
 
     @SuppressWarnings("rawtypes")
@@ -162,18 +179,24 @@ public class SortedPointers<T extends Comparable<T>> {
     }
 
     public void clear(){
-        //this.first = null;
+        //this.first.setNext(null);
+        //this.first.setPrevious(null);
+        this.first = null;
+
+        //this.last.setNext(null);
+        //this.last.setPrevious(null);
         this.last = null;
+
         this.size = 0;
     }
 
     @SuppressWarnings("rawtypes")
     public void print(){
-        
+
         Node aux = this.first;
 
         System.out.print("[");
-        
+
         for (int i = 0; i < this.size; i++){
             if (i == this.size - 1){
                 System.out.print(aux.getData());

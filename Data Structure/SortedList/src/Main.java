@@ -17,16 +17,18 @@ public class Main {
         array.add(4);
         array.add(5);
         array.add(6);
+        array.add(1);
         array.print();  
 
-
-        array.remove(3);
-        array.print();
-        array.remove(3);
+        array.remove(5);
         array.print();
         array.remove(0);
         array.print();
+        array.remove(2);
+        array.print();
         array.remove(1);
+        array.print();
+        array.remove(0);
         array.print();
         array.remove(0);
         array.print();
