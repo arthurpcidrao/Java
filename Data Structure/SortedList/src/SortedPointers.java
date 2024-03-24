@@ -202,7 +202,7 @@ public class SortedPointers<T extends Comparable<T>> {
                 System.out.print(aux.getData());
             }
             else{
-                System.out.print(aux.getData() + " ");
+                System.out.print(aux.getData() + ", ");
             }
             aux = aux.getNext();
         }

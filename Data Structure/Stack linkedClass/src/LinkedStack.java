@@ -1,4 +1,4 @@
-public class LinkedPointers<T extends Comparable<T>> {
+public class LinkedStack<T extends Comparable<T>> {
     
     @SuppressWarnings("rawtypes")    
     private Node first;
@@ -8,13 +8,13 @@ public class LinkedPointers<T extends Comparable<T>> {
 
     private int size;
 
-    public LinkedPointers(){
+    public LinkedStack(){
         this.last = null;
         this.size = 0;
     }
 
     @SuppressWarnings({ "rawtypes"})
-    public void add(T unit){
+    public void push(T unit){
         Node newNode = new Node<>(unit);
 
         if (this.last == null){
@@ -29,23 +29,13 @@ public class LinkedPointers<T extends Comparable<T>> {
         this.size++;
     }
 
-    @SuppressWarnings({ "rawtypes"})
-    public void add(T unit, int pos){
-        Node aux = this.first;
-        Node middle = new Node<>(unit);
-
-        if (pos >= 0 && pos <= this.size){
-            for (int i = 0; i < pos-1; i++){
-                aux = aux.getNext();
-            }
-            middle.setNext(aux.getNext()); // introduzindo o nó que liga o meio com o fim
-            aux.setNext(middle); // colocando o começo com o meio
-            this.size++;
-        }
-    }
-
     public int size(){
         return this.size;
+    }
+
+    @SuppressWarnings("unchecked")
+    public T top(){
+        return (T) this.last.getData();
     }
 
     @SuppressWarnings({ "rawtypes", "unlikely-arg-type" })
@@ -105,7 +95,7 @@ public class LinkedPointers<T extends Comparable<T>> {
         return count;
     }
 
-    public void remove(){
+    public void pop(){
         if (this.first != null){
             if (this.size == 1){
                 clear();
@@ -115,59 +105,6 @@ public class LinkedPointers<T extends Comparable<T>> {
                 this.last = this.last.getPrevious();
                 this.size--;
             }
-        }
-    }
-
-    @SuppressWarnings("rawtypes")
-    public void remove(int pos){
-        
-        if (pos >= 0 && pos < this.size){
-
-            if (this.first != null){
-                Node aux = this.first;
-
-                if (this.size == 1){
-                    clear();
-                }
-                else{
-                    if (pos == 0){
-                        this.first.getNext().setPrevious(null);
-                        this.first = this.first.getNext();
-                        this.size--;
-                    }
-                    else if (pos == this.size - 1){
-                        remove();
-                    }
-                    else{
-                        for (int i = 0; i < pos - 1; i++){
-                            aux = aux.getNext();
-                        }
-                        aux.getNext().getNext().setPrevious(aux);
-                        aux.setNext(aux.getNext().getNext());
-                        this.size--;
-                    }
-                }
-            }
-        }
-            
-    }
-
-    @SuppressWarnings("rawtypes")
-    public void remove(T unit){
-        Node aux = this.first;
-        boolean exists = false;
-        int pos = 0;
-
-        for (int i = 0; i < this.size; i++){
-            if (unit.equals(aux.getData())){
-                pos = i;
-                exists = true;
-                break;
-            }
-            aux = aux.getNext();
-        }
-        if(exists){
-            remove(pos);
         }
     }
 
