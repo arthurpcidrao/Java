@@ -48,11 +48,15 @@ public class Queue<T extends Comparable<T>> {
     }
 
     @SuppressWarnings("unchecked")
-    public T getUnit(int i){
-        if (i >= 0 && i < this.size){
-            return (T) this.array[i];
+    public T peek(){
+        return (T) this.array[0];
+    }
+
+    public void dequeue(){
+        for (int i = 0; i < this.size; i++){
+            this.array[i] = this.array[i+1];
         }
-        return null;
+        this.size--;
     }
 
     @SuppressWarnings("unchecked")
@@ -74,14 +78,6 @@ public class Queue<T extends Comparable<T>> {
             }
         }
         return count;
-    }
-
-
-    public void remove(){
-        for (int i = 0; i < this.size; i++){
-            this.array[i] = this.array[i+1];
-        }
-        this.size--;
     }
 
     @SuppressWarnings("unchecked")
