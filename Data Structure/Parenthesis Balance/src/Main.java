@@ -18,17 +18,13 @@ public class Main {
                 stack.push(ch);
             }
             if (ch == ')'){
-                stack.push(ch);
-                stack.pop();
-                
                 if (stack.size() == 0){
                     result = "incorrect";
                     break;
                 }
                 else{
-                    if (stack.top().equals('(')){
-                        stack.pop();
-                    }
+                    stack.pop();
+                    
                 }
             }
         }
