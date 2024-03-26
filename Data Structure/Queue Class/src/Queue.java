@@ -11,7 +11,7 @@ public class Queue<T extends Comparable<T>> {
         this.size = 0;
     }
 
-    public void add(T unit){
+    public void enqueue(T unit){
         if(this.size == this.array.length){
             extraSpace();
         }
