@@ -4,118 +4,118 @@ public class Main {
     public static void main(String[] args) throws Exception {
         Scanner input = new Scanner(System.in);
 
-        int num = input.nextInt();
+        int numCases = input.nextInt();
         input.nextLine();
 
-        LinkedStack<String> posfix = new LinkedStack<>();
-        LinkedStack<String> operators = new LinkedStack<>();
+        Stack<String> posfix = new Stack<>();
+        Stack<String> operators = new Stack<>();
 
-        for (int i = 0; i < num; i++){
-            String expression = input.nextLine();
+        for (int i = 0; i < numCases; i++){
 
-            int countOperations = 0;
+            String sentence = input.nextLine();
+
             int preference = 0;
-            int currentPref = 0;
-            int countP = 0;
-            boolean parenteses = false;
-            boolean teste = false;
-            
-            for (int j = 0; j < expression.length(); j++){
-                String ch = expression.charAt(j) + "";  // para transformar um char em String, basta concatenar um vazio
+            int currentPreference = 0;
+            int countOp = 0;
+            boolean moreThanOne = false;
 
-                //System.out.println("posfix = " + posfix.top());
-                //System.out.println("operators = " + operators.top());
+            for (int j = 0; j < sentence.length(); j++){
+                String ch = sentence.charAt(j) + "";
+
+                System.out.println("posfix = " + posfix.top());
+                System.out.println("operators = " + operators.top());
 
                 if (ch.equals("(")){
-                    countP = 0;
-                    parenteses = true;
+                    operators.push(ch);
+                    countOp = 0;
+                    moreThanOne = false;
                 }
 
-                if (ch.equals("+") || ch.equals("-") || ch.equals("*") ||  // continua na próxima linha
+                if (ch.equals("+") || ch.equals("-") || ch.equals("*") ||
                 ch.equals("/") || ch.equals("^")){
-                    countOperations++;
+                    moreThanOne = false;
+                    countOp++;
                     
                     preference = cases(ch);
 
-                    if (parenteses){
-                        if (countP == 0){
-                            teste = true;
-                        }
-                        countP++;
-                    }
-
-                    if (preference > currentPref || countOperations == 1 || teste){
+                    if (preference > currentPreference || countOp == 1){
                         operators.push(ch);
-                        teste = false;
-                    }                    
+                    }
                     else{
-                        while(posfix.size() > 1){
-                            unstack(posfix, operators);
+                        if (operators.exists("(")){
+                            while(!operators.top().equals("(") && cases(operators.top()) >= preference){
+                                unstack(posfix, operators);
+                            }
+                        }
+                        else{
+                            while(!operators.isEmpty() && cases(operators.top()) >= preference){
+                                unstack(posfix, operators);
+                            }
                         }
                         operators.push(ch);
                     }
-                    
-                    currentPref = preference;
+                    currentPreference = preference;
                 }
-                else if (ch.equals(")")){
-                    parenteses = false;
-                    while(operators.size() > 0){
+                else if(ch.equals(")")){
+                    moreThanOne = false;
+                    while(!operators.top().equals("(")){
                         unstack(posfix, operators);
                     }
+                    operators.pop();
                 }
                 else{
                     if (!ch.equals("(")){
                         posfix.push(ch);
+                        if (moreThanOne){
+                            String aux2 = posfix.pop();
+                            String aux1 = posfix.pop();
+                            posfix.push(aux1+aux2);
+                        }
+                        moreThanOne = true;
                     }
                 }
-                //System.out.println();
-                //System.out.println(ch);
+                
+                System.out.println();
+                System.out.println(ch);
             }
             while(operators.size() > 0){
                 unstack(posfix, operators);
             }
-            System.out.println(posfix.top());
+            System.out.println(posfix.pop());
             posfix.clear();
             operators.clear();
         }
-
+        
         input.close();
     }
 
 
 
 
-    public static void unstack(LinkedStack<String> posfix, LinkedStack<String> operators){
+    public static void unstack(Stack<String> posfix, Stack<String> operators){
         String aux1 = "";
         String aux2 = "";
-
         aux1 = posfix.pop() + operators.pop();
         aux2 = posfix.pop() + aux1;
         posfix.push(aux2);
     }
 
     public static int cases(String ch){
-        int preference = 0;
         
         switch(ch){
             case "+":
-                preference = 0;
-                break;
+                return 1;
             case "-":
-                preference = 0;
-                break;
+                return 1;
             case "*":
-                preference = 1;
-                break;
+                return 2;
             case "/":
-                preference = 1;
-                break;
+                return 2;
             case "^":
-                preference = 2;
-                break;
+                return 3;
+            default:
+                return 0;
         }
-        
-        return preference;
     }
 }
 

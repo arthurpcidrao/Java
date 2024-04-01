@@ -41,6 +41,15 @@ public class LinkedStack<T extends Comparable<T>> {
         return null;
     }
 
+    public boolean isEmpty(){
+        if (this.size == 0){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
     @SuppressWarnings({ "rawtypes", "unlikely-arg-type" })
     public int getIndex(T unit){
         Node aux = this.first;
