@@ -14,71 +14,47 @@ public class Main {
 
             String sentence = input.nextLine();
 
-            int preference = 0;
-            int currentPreference = 0;
-            int countOp = 0;
-            boolean moreThanOne = false;
-
             for (int j = 0; j < sentence.length(); j++){
                 String ch = sentence.charAt(j) + "";
 
-                System.out.println("posfix = " + posfix.top());
-                System.out.println("operators = " + operators.top());
+                //System.out.println("operators: " + operators.top());
+                //System.out.println("posfix: " + posfix.top());
 
                 if (ch.equals("(")){
                     operators.push(ch);
-                    countOp = 0;
-                    moreThanOne = false;
                 }
 
-                if (ch.equals("+") || ch.equals("-") || ch.equals("*") ||
+                else if (ch.equals("+") || ch.equals("-") || ch.equals("*") ||
                 ch.equals("/") || ch.equals("^")){
-                    moreThanOne = false;
-                    countOp++;
-                    
-                    preference = cases(ch);
 
-                    if (preference > currentPreference || countOp == 1){
+                    if (!operators.isEmpty() && cases(ch) <= cases(operators.top())){
+                        while(!operators.isEmpty() && cases(ch) <= cases(operators.top())){
+                            unstack(posfix, operators);
+                        }
                         operators.push(ch);
                     }
+
                     else{
-                        if (operators.exists("(")){
-                            while(!operators.top().equals("(") && cases(operators.top()) >= preference){
-                                unstack(posfix, operators);
-                            }
-                        }
-                        else{
-                            while(!operators.isEmpty() && cases(operators.top()) >= preference){
-                                unstack(posfix, operators);
-                            }
-                        }
                         operators.push(ch);
                     }
-                    currentPreference = preference;
-                }
-                else if(ch.equals(")")){
-                    moreThanOne = false;
-                    while(!operators.top().equals("(")){
-                        unstack(posfix, operators);
-                    }
-                    operators.pop();
                 }
                 else{
-                    if (!ch.equals("(")){
+                    if (!ch.equals(")")){
                         posfix.push(ch);
-                        if (moreThanOne){
-                            String aux2 = posfix.pop();
-                            String aux1 = posfix.pop();
-                            posfix.push(aux1+aux2);
-                        }
-                        moreThanOne = true;
                     }
                 }
+
+                if (!operators.isEmpty() && ch.equals(")")){
+                    while(!operators.isEmpty() && !operators.top().equals("(")){
+                        unstack(posfix, operators);
+                    }
+                    operators.pop(); // para remover o parêntese de entrada
+                }
+                //System.out.println();
+                //System.out.println(ch);
                 
-                System.out.println();
-                System.out.println(ch);
             }
-            while(operators.size() > 0){
+            while(!operators.isEmpty()){
                 unstack(posfix, operators);
             }
             System.out.println(posfix.pop());

@@ -35,7 +35,17 @@ public class LinkedStack<T extends Comparable<T>> {
 
     @SuppressWarnings("unchecked")
     public T top(){
+        if (this.size == 0){
+            return null;
+        }
         return (T) this.last.getData();
+    }
+
+    public boolean isEmpty(){
+        if (this.size == 0){
+            return true;
+        }
+        return false;
     }
 
     @SuppressWarnings({ "rawtypes", "unlikely-arg-type" })

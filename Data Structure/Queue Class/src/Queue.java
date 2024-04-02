@@ -52,11 +52,18 @@ public class Queue<T extends Comparable<T>> {
         return (T) this.array[0];
     }
 
-    public void dequeue(){
+    @SuppressWarnings("unchecked")
+    public T dequeue(){
+        T aux = null;
+
+        aux  = (T) this.array[0];
+
         for (int i = 0; i < this.size; i++){
             this.array[i] = this.array[i+1];
         }
         this.size--;
+
+        return aux;
     }
 
     @SuppressWarnings("unchecked")

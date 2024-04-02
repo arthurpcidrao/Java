@@ -1,4 +1,4 @@
-public class Stack<T extends Comparable<T>> {
+public class Queue<T extends Comparable<T>> {
     
     //attributes
     private Comparable<T> array[];
@@ -6,13 +6,13 @@ public class Stack<T extends Comparable<T>> {
 
     // methods
     @SuppressWarnings("unchecked")
-    public Stack(){ // constructor
+    public Queue(){ // constructor
         this.array = (Comparable<T>[]) new Comparable[8];
         this.size = 0;
     }
 
-    public void push(T unit){
-        if(this.size == this.array.length){
+    public void enqueue(T unit){
+        if(this.size == this.array.length - 2){
             extraSpace();
         }
         this.array[this.size] = unit;
@@ -33,27 +33,37 @@ public class Stack<T extends Comparable<T>> {
         return this.size;
     }
 
-    public boolean isEmpty(){
+    public boolean isNull(){
         if (this.size == 0){
             return true;
         }
-        return false;
+        else{
+            return false;
+        }
+    }
+
+    // Implementar esse método
+    public boolean isFull(){
+        return true;
     }
 
     @SuppressWarnings("unchecked")
-    public T top(){
-        if (this.size > 0){
-            return (T) this.array[this.size - 1];
-        }
-        return null;
+    public T peek(){
+        return (T) this.array[0];
     }
 
     @SuppressWarnings("unchecked")
-    public T getUnit(int i){
-        if (i >= 0 && i < this.size){
-            return (T) this.array[i];
+    public T dequeue(){
+        T aux = null;
+
+        aux  = (T) this.array[0];
+
+        for (int i = 0; i < this.size; i++){
+            this.array[i] = this.array[i+1];
         }
-        return null;
+        this.size--;
+
+        return aux;
     }
 
     @SuppressWarnings("unchecked")
@@ -75,14 +85,6 @@ public class Stack<T extends Comparable<T>> {
             }
         }
         return count;
-    }
-
-    @SuppressWarnings("unchecked")
-    public T pop(){
-        if (this.size > 0){
-            this.size = this.size - 1;
-        }
-        return (T) this.array[this.size];
     }
 
     @SuppressWarnings("unchecked")

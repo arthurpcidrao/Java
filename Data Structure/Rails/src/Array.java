@@ -1,4 +1,4 @@
-public class Stack<T extends Comparable<T>> {
+public class Array<T extends Comparable<T>> {
     
     //attributes
     private Comparable<T> array[];
@@ -6,17 +6,31 @@ public class Stack<T extends Comparable<T>> {
 
     // methods
     @SuppressWarnings("unchecked")
-    public Stack(){ // constructor
+    public Array(){ // constructor
         this.array = (Comparable<T>[]) new Comparable[8];
         this.size = 0;
     }
 
-    public void push(T unit){
+    public void add(T unit){
         if(this.size == this.array.length){
             extraSpace();
         }
         this.array[this.size] = unit;
         this.size++;
+    }
+
+    public void add(T unit, int pos){
+        // pos >= 0
+        if(this.size == this.array.length){
+            extraSpace();
+        }
+        if(pos >= 0 && pos <= this.size){
+            for (int i = this.size; i > pos; i--){
+                this.array[i] = this.array[i-1];
+            }
+            this.array[pos] = unit;
+            this.size++;
+        }
     }
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
@@ -31,21 +45,6 @@ public class Stack<T extends Comparable<T>> {
 
     public int size(){
         return this.size;
-    }
-
-    public boolean isEmpty(){
-        if (this.size == 0){
-            return true;
-        }
-        return false;
-    }
-
-    @SuppressWarnings("unchecked")
-    public T top(){
-        if (this.size > 0){
-            return (T) this.array[this.size - 1];
-        }
-        return null;
     }
 
     @SuppressWarnings("unchecked")
@@ -77,18 +76,49 @@ public class Stack<T extends Comparable<T>> {
         return count;
     }
 
-    @SuppressWarnings("unchecked")
-    public T pop(){
-        if (this.size > 0){
-            this.size = this.size - 1;
+    public void remove(T unit){
+        int pos = 0;
+        boolean exists = false;
+        for (int i = 0; i < this.size; i++){
+            if(this.array[i].equals(unit)){
+                pos = i;
+                exists = true;
+                break;
+            }
         }
-        return (T) this.array[this.size];
+        if(exists){
+            remove(pos);
+        }
+    }
+
+    public void remove(int pos){
+        for (int i = pos; i < this.size - 1; i++){
+            this.array[i] = this.array[i+1];
+        }
+        this.size--;
+    }
+
+    public void remove(){
+        this.size = this.size - 1;
     }
 
     @SuppressWarnings("unchecked")
     public void clear(){
         this.array = (Comparable<T>[]) new Comparable[8];
         this.size = 0;
+    }
+
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    public void sort(){
+        for (int i = 0; i < this.size - 1; i++){
+            for (int j = i + 1; j < this.size; j++){
+                if (((T)this.array[i]).compareTo((T)this.array[j]) > 0){
+                    Comparable temp = this.array[i];
+                    this.array[i] = this.array[j];
+                    this.array[j] = temp;
+                }
+            }
+        }
     }
 
     public void print(){
