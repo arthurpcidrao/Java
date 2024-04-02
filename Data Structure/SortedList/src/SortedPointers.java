@@ -55,19 +55,39 @@ public class SortedPointers<T extends Comparable<T>> {
         return this.size;
     }
 
-    @SuppressWarnings({ "rawtypes", "unlikely-arg-type" })
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    public T getData(Node data){
+        return (T) data.getData();
+    }
+ 
+    @SuppressWarnings({ "rawtypes"})
     public int getIndex(T unit){
         Node aux = this.first;
         int index = 0;
 
         for (int i = 0; i < this.size; i++){
-            if ((aux).equals(unit)){
+            if (aux.getData().equals(unit)){
                 index = i;
+                break;
             }
             aux = aux.getNext();
         }
 
         return index;
+    }
+
+    @SuppressWarnings({ "rawtypes"})
+    public Node getMemory(T unit){
+        Node aux = this.first;
+
+        for (int i = 0; i < this.size; i++){
+            if (aux.getData().equals(unit)){
+                break;
+            }
+            aux = aux.getNext();
+        }
+
+        return aux;
     }
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
