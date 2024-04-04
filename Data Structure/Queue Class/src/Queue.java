@@ -3,12 +3,16 @@ public class Queue<T extends Comparable<T>> {
     //attributes
     private Comparable<T> array[];
     private int size;
+    private int begin;
+    private int end;
 
     // methods
     @SuppressWarnings("unchecked")
     public Queue(){ // constructor
         this.array = (Comparable<T>[]) new Comparable[8];
         this.size = 0;
+        this.begin = 0;
+        this.end = 0;
     }
 
     public void enqueue(T unit){
@@ -17,6 +21,7 @@ public class Queue<T extends Comparable<T>> {
         }
         this.array[this.size] = unit;
         this.size++;
+        this.end++;
     }
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
@@ -42,11 +47,6 @@ public class Queue<T extends Comparable<T>> {
         }
     }
 
-    // Implementar esse método
-    public boolean isFull(){
-        return true;
-    }
-
     @SuppressWarnings("unchecked")
     public T peek(){
         return (T) this.array[0];
@@ -55,13 +55,14 @@ public class Queue<T extends Comparable<T>> {
     @SuppressWarnings("unchecked")
     public T dequeue(){
         T aux = null;
+        aux = (T) this.array[this.begin];
 
-        aux  = (T) this.array[0];
-
-        for (int i = 0; i < this.size; i++){
-            this.array[i] = this.array[i+1];
-        }
+        this.begin++;
         this.size--;
+
+        if (this.size == 0){
+            clear();
+        }
 
         return aux;
     }
@@ -96,12 +97,12 @@ public class Queue<T extends Comparable<T>> {
     public void print(){
         System.out.print("[");
         if(this.size == 1){
-            System.out.print(this.array[0]);
+            System.out.print(this.array[this.begin]);
         }
         else{
-            for (int i = 0; i < this.size; i++){
+            for (int i = this.begin; i < this.end; i++){
                 
-                if (i == this.size - 1){
+                if (i == this.end - 1){
                     System.out.print(this.array[i]);
                 }
                 else{
