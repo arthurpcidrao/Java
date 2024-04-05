@@ -47,11 +47,6 @@ public class Queue<T extends Comparable<T>> {
         }
     }
 
-    // Implementar esse método somente para queues circulares
-    public boolean isFull(){
-        return true;
-    }
-
     @SuppressWarnings("unchecked")
     public T peek(){
         return (T) this.array[0];
