@@ -7,8 +7,8 @@ public class Main {
         int numCases = input.nextInt();
         input.nextLine();
 
-        Stack<String> posfix = new Stack<>();
-        Stack<String> operators = new Stack<>();
+        LinkedStack<String> posfix = new LinkedStack<>();
+        LinkedStack<String> operators = new LinkedStack<>();
 
         for (int i = 0; i < numCases; i++){
 
@@ -68,7 +68,7 @@ public class Main {
 
 
 
-    public static void unstack(Stack<String> posfix, Stack<String> operators){
+    public static void unstack(LinkedStack<String> posfix, LinkedStack<String> operators){
         String aux1 = "";
         String aux2 = "";
         aux1 = posfix.pop() + operators.pop();
