@@ -7,7 +7,7 @@ public class Array<T extends Comparable<T>> {
     // methods
     @SuppressWarnings("unchecked")
     public Array(){ // constructor
-        this.array = (Comparable<T>[]) new Comparable[8];
+        this.array = new Comparable[8];
         this.size = 0;
     }
 
