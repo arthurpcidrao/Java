@@ -80,7 +80,7 @@ public class LinkedQueue<T extends Comparable<T>> {
     }
 
     @SuppressWarnings({ "unchecked" })
-    public T peek(int num){
+    public T getFirst(){
         return (T) this.first.getData();
     }
 
@@ -131,17 +131,15 @@ public class LinkedQueue<T extends Comparable<T>> {
 
         Node aux = this.first;
 
-        System.out.print("[");
-
         for (int i = 0; i < this.size; i++){
             if (i == this.size - 1){
                 System.out.print(aux.getData());
             }
             else{
-                System.out.print(aux.getData() + ", ");
+                System.out.print(aux.getData() + " ");
             }
             aux = aux.getNext();
         }
-        System.out.println("]");
+        System.out.println();
     }
 }

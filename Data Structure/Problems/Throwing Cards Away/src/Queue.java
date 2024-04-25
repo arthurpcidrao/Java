@@ -5,6 +5,7 @@ public class Queue<T extends Comparable<T>> {
     private int size;
     private int begin;
     private int end;
+    private int capacity;
 
     // methods
     @SuppressWarnings("unchecked")
@@ -16,20 +17,35 @@ public class Queue<T extends Comparable<T>> {
     }
 
     @SuppressWarnings("unchecked")
-    public Queue(int len){ // constructor
-        this.array = (Comparable<T>[]) new Comparable[len];
+    public Queue(int capacity){ // constructor
+        this.array = (Comparable<T>[]) new Comparable[capacity];
         this.size = 0;
         this.begin = 0;
         this.end = 0;
+        this.capacity = capacity;
     }
 
     public void enqueue(T unit){
-        if(this.size == this.array.length){
-            extraSpace();
+        if(this.size < this.capacity){
+            this.array[this.end] = unit;
+            this.end = (this.end + 1) % this.capacity;
+            this.size++;
         }
-        this.array[this.end] = unit;
-        this.size++;
-        this.end++;
+    }
+
+    @SuppressWarnings("unchecked")
+    public T dequeue(){
+
+        T aux = null;
+
+        if (this.size > 0){
+            aux = (T) this.array[this.begin];
+
+            this.begin = (this.begin + 1) % this.capacity;
+            this.size--;
+        }
+            
+        return aux;
     }
 
     @SuppressWarnings({ "unchecked", "rawtypes", "unused" })
@@ -61,21 +77,6 @@ public class Queue<T extends Comparable<T>> {
     }
 
     @SuppressWarnings("unchecked")
-    public T dequeue(){
-
-        T aux = null;
-
-        if (this.size > 0){
-            aux = (T) this.array[this.begin];
-
-            this.begin++;
-            this.size--;
-        }
-            
-        return aux;
-    }
-
-    @SuppressWarnings("unchecked")
     public boolean exists(T unit){
         for (int i = 0; i < this.size; i++){
             if(((T)this.array[i]).compareTo(unit) == 0){
@@ -96,10 +97,12 @@ public class Queue<T extends Comparable<T>> {
         return count;
     }
 
-    @SuppressWarnings("unchecked")
+    //@SuppressWarnings("unchecked")
     public void clear(){
-        this.array = (Comparable<T>[]) new Comparable[8];
+        //this.array = (Comparable<T>[]) new Comparable[8];
         this.size = 0;
+        this.begin = 0;
+        this.end = 0;
     }
 
     public void print(){
