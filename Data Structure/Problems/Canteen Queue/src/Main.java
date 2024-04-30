@@ -15,23 +15,17 @@ public class Main {
             String grades[] = stringGrades.split(" ");
 
             Heap<Student> heap = new Heap<>(numStudents);
-            LinkedQueue<Student> queue = new LinkedQueue<>();
-
             int count = 0;
 
             for (int j = 0; j < numStudents; j++){
                 Student student = new Student(j, Integer.parseInt(grades[j]));
                 heap.add(student);
-                queue.enqueue(student);
             }
 
             for (int j = 0; j < numStudents; j++){
-                int heapNext = heap.next().getGrade();
-                int queueNext = queue.dequeue().getGrade();
+                int heapNext = heap.next().getArrival();
 
-                System.out.print(heapNext);
-                System.out.println(" "+queueNext);
-                if (heapNext == queueNext){
+                if (heapNext == j){
                     count++;
                 }
             }
