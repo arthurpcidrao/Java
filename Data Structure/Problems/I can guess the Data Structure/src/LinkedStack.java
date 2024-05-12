@@ -1,6 +1,6 @@
 public class LinkedStack<T extends Comparable<T>> {
-    
-    @SuppressWarnings("rawtypes")    
+
+    @SuppressWarnings("rawtypes")
     private Node first;
 
     @SuppressWarnings("rawtypes")
@@ -33,16 +33,19 @@ public class LinkedStack<T extends Comparable<T>> {
         return this.size;
     }
 
+    @SuppressWarnings("unchecked")
+    public T top(){
+        if (this.size == 0){
+            return null;
+        }
+        return (T) this.last.getData();
+    }
+
     public boolean isEmpty(){
         if (this.size == 0){
             return true;
         }
         return false;
-    }
-
-    @SuppressWarnings("unchecked")
-    public T top(){
-        return (T) this.last.getData();
     }
 
     @SuppressWarnings({ "rawtypes", "unlikely-arg-type" })
@@ -102,16 +105,16 @@ public class LinkedStack<T extends Comparable<T>> {
         return count;
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @SuppressWarnings("unchecked")
     public T pop(){
         if (this.first != null){
             Object aux;
             if (this.size == 1){
-                aux = (Comparable) this.last.getData();
+                aux = this.last.getData();
                 clear();
             }
             else{
-                aux = (Comparable) this.last.getData();
+                aux = this.last.getData();
                 this.last.getPrevious().setNext(null);
                 this.last = this.last.getPrevious();
                 this.size--;

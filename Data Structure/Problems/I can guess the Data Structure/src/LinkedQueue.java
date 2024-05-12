@@ -1,20 +1,21 @@
-public class LinkedStack<T extends Comparable<T>> {
-    
-    @SuppressWarnings("rawtypes")    
+public class LinkedQueue<T extends Comparable<T>> {
+
+    @SuppressWarnings("rawtypes")
     private Node first;
 
     @SuppressWarnings("rawtypes")
-    private Node last = null;
+    private Node last;
 
     private int size;
 
-    public LinkedStack(){
+    public LinkedQueue(){
         this.last = null;
+        this.first = null;
         this.size = 0;
     }
 
     @SuppressWarnings({ "rawtypes"})
-    public void push(T unit){
+    public void enqueue(T unit){
         Node newNode = new Node<>(unit);
 
         if (this.last == null){
@@ -33,7 +34,7 @@ public class LinkedStack<T extends Comparable<T>> {
         return this.size;
     }
 
-    public boolean isEmpty(){
+    public boolean isNull(){
         if (this.size == 0){
             return true;
         }
@@ -41,8 +42,26 @@ public class LinkedStack<T extends Comparable<T>> {
     }
 
     @SuppressWarnings("unchecked")
-    public T top(){
-        return (T) this.last.getData();
+    public T next(){
+        return (T) this.first.getData();
+    }
+
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    public T dequeue(){
+        if (this.first != null){
+            Object aux;
+            if (this.size == 1){
+                aux = (Comparable) this.first.getData();
+                clear();
+            }
+            else{
+                aux = (Comparable) this.first.getData();
+                this.first = this.first.getNext();
+                this.size--;
+            }
+            return (T) aux;
+        }
+        return null;
     }
 
     @SuppressWarnings({ "rawtypes", "unlikely-arg-type" })
@@ -60,17 +79,9 @@ public class LinkedStack<T extends Comparable<T>> {
         return index;
     }
 
-    @SuppressWarnings({ "rawtypes", "unchecked" })
-    public T getUnit(int num){
-        Node aux = this.first;
-
-        if (num >= 0 && num < this.size){
-            for (int i = 0; i < num; i++){
-                aux = aux.getNext();
-            }
-            return (T) aux.getData();
-        }
-        return null;
+    @SuppressWarnings({ "unchecked" })
+    public T peek(int num){
+        return (T) this.first.getData();
     }
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -102,24 +113,6 @@ public class LinkedStack<T extends Comparable<T>> {
         return count;
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-    public T pop(){
-        if (this.first != null){
-            Object aux;
-            if (this.size == 1){
-                aux = (Comparable) this.last.getData();
-                clear();
-            }
-            else{
-                aux = (Comparable) this.last.getData();
-                this.last.getPrevious().setNext(null);
-                this.last = this.last.getPrevious();
-                this.size--;
-            }
-            return (T) aux;
-        }
-        return null;
-    }
 
     public void clear(){
         //this.first.setNext(null);
