@@ -1,6 +1,6 @@
 public class HashingTable<T extends Comparable<T>> {
     
-    private SortedPointers<String> array[];
+    private LinkedList<String> array[];
     private int size;
     private int elements;
 
@@ -9,7 +9,7 @@ public class HashingTable<T extends Comparable<T>> {
 
     @SuppressWarnings("unchecked")
     public HashingTable(int length){
-        this.array = new SortedPointers[length];
+        this.array = new LinkedList[length];
         this.size = 0;
         this.elements = 0;
     }
@@ -17,13 +17,14 @@ public class HashingTable<T extends Comparable<T>> {
 
     private int hashingFunction(String element){
         //pegando a primeira letra correspondente na tabela ascii
-        char firstChar = element.charAt(0);
-        int asciiValue = firstChar;
+        // char firstChar = element.charAt(0);
+        // int asciiValue = firstChar;
 
         //caso queira colocar números, faça:
         //int value = Integer.parseInt(element);
 
-        return asciiValue % this.array.length;
+        //return asciiValue % this.array.length;
+        return (Integer.parseInt(element)) % this.array.length;
     }
 
 
@@ -31,7 +32,7 @@ public class HashingTable<T extends Comparable<T>> {
         int rest = hashingFunction(element);
 
         if (this.array[rest] == null){
-            this.array[rest] = new SortedPointers<>();
+            this.array[rest] = new LinkedList<>();
             this.size++;
         }
 
@@ -56,12 +57,21 @@ public class HashingTable<T extends Comparable<T>> {
     }
 
 
-    public void show(){
+    public String show(){
+        String ans = "";
+
         for (int i = 0; i < this.array.length; i++){
             if (this.array[i] != null){
-                System.out.print((i+1) + "°: ");
-                this.array[i].print();
+                //System.out.print(i + " -> ");
+                ans = ans + (i + " -> ");
+                ans = ans + this.array[i].print();
+            }
+            else{
+                //System.out.println(i + " -> \\");
+                ans = ans + (i + " -> \\\n");
             }
         }
+
+        return ans;
     }
 }

@@ -12,6 +12,22 @@ public class Main {
         table.add("zuila");
 
         table.show();
+        System.out.println();
+
+        table.remove("arthur");
+        table.show();
+
+        System.out.println();
+        table.remove("alice");
+        table.show();
+
+        System.out.println();
+        table.remove("jane");
+        table.show();
+
+        System.out.println();
+        table.add("bruno");
+        table.show();
 
     }
 }

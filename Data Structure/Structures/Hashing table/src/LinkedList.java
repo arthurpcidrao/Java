@@ -105,21 +105,29 @@ public class LinkedList<T extends Comparable<T>> {
         return count;
     }
 
-    public void remove(){
+    @SuppressWarnings("unchecked")
+    public T remove(){
+        T aux = (T) this.last.getData();
+
         if (this.first != null){
             if (this.size == 1){
+                aux = (T) this.last.getData();
                 clear();
             }
             else{
+                aux = (T) this.last.getData();
                 this.last.getPrevious().setNext(null);
                 this.last = this.last.getPrevious();
                 this.size--;
             }
         }
+        return aux;
     }
 
-    @SuppressWarnings("rawtypes")
-    public void remove(int pos){
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    public T remove(int pos){
+
+        T auxData = null;
         
         if (pos >= 0 && pos < this.size){
 
@@ -127,21 +135,27 @@ public class LinkedList<T extends Comparable<T>> {
                 Node aux = this.first;
 
                 if (this.size == 1){
+                    auxData = (T) this.last.getData();
                     clear();
                 }
                 else{
                     if (pos == 0){
+                        auxData = (T) this.last.getData();
+
                         this.first.getNext().setPrevious(null);
                         this.first = this.first.getNext();
                         this.size--;
                     }
                     else if (pos == this.size - 1){
-                        remove();
+                        auxData = remove();
                     }
                     else{
                         for (int i = 0; i < pos - 1; i++){
                             aux = aux.getNext();
                         }
+
+                        auxData = (T) aux.getNext().getData();
+
                         aux.getNext().getNext().setPrevious(aux);
                         aux.setNext(aux.getNext().getNext());
                         this.size--;
@@ -149,11 +163,13 @@ public class LinkedList<T extends Comparable<T>> {
                 }
             }
         }
+
+        return auxData;
             
     }
 
     @SuppressWarnings("rawtypes")
-    public void remove(T unit){
+    public T remove(T unit){
         Node aux = this.first;
         boolean exists = false;
         int pos = 0;
@@ -167,10 +183,12 @@ public class LinkedList<T extends Comparable<T>> {
             aux = aux.getNext();
         }
         if(exists){
-            remove(pos);
+            return remove(pos);
         }
-    }
 
+        return null;
+    }
+    
     public void clear(){
         //this.first.setNext(null);
         //this.first.setPrevious(null);

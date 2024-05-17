@@ -1,20 +1,19 @@
-public class SortedPointers<T extends Comparable<T>> {
-
-    @SuppressWarnings("rawtypes")
-    private Node first = null;
+public class LinkedList<T extends Comparable<T>> {
+    
+    @SuppressWarnings("rawtypes")    
+    private Node first;
 
     @SuppressWarnings("rawtypes")
     private Node last = null;
 
     private int size;
 
-    public SortedPointers(){
-        this.first = null;
+    public LinkedList(){
         this.last = null;
         this.size = 0;
     }
 
-    @SuppressWarnings({ "rawtypes", "unchecked"})
+    @SuppressWarnings({ "rawtypes"})
     public void add(T unit){
         Node newNode = new Node<>(unit);
 
@@ -22,72 +21,46 @@ public class SortedPointers<T extends Comparable<T>> {
             this.first = newNode;
             this.last = newNode;
         }
-        else if (((T)newNode.getData()).compareTo((T)this.first.getData()) < 0){
-            newNode.setNext(this.first);
-            this.first.setPrevious(newNode);
-            this.first = newNode;
-        }
-        else if (((T)newNode.getData()).compareTo((T)this.last.getData()) >= 0){
+        else{
             this.last.setNext(newNode);
             newNode.setPrevious(this.last);
             this.last = newNode;
         }
-        else{
-            Node aux = this.first;
-            while(((T)newNode.getData()).compareTo((T)aux.getData()) >= 0){
+        this.size++;
+    }
+
+    @SuppressWarnings({ "rawtypes"})
+    public void add(T unit, int pos){
+        Node aux = this.first;
+        Node middle = new Node<>(unit);
+
+        if (pos >= 0 && pos <= this.size){
+            for (int i = 0; i < pos-1; i++){
                 aux = aux.getNext();
             }
-            // conectando o novo elemento ao conjunto
-            newNode.setPrevious(aux.getPrevious());
-            newNode.setNext(aux);
-
-            // conectando a primeira parte da lista ao novo elemento
-            aux.getPrevious().setNext(newNode);
-
-            // conectando a segunda parte da lista ao novo elemento
-            aux.setPrevious(newNode);
+            middle.setNext(aux.getNext()); // introduzindo o nó que liga o meio com o fim
+            aux.setNext(middle); // colocando o começo com o meio
+            this.size++;
         }
-
-        this.size++;
     }
 
     public int size(){
         return this.size;
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-    public T getData(Node data){
-        return (T) data.getData();
-    }
- 
-    @SuppressWarnings({ "rawtypes"})
+    @SuppressWarnings({ "rawtypes", "unlikely-arg-type" })
     public int getIndex(T unit){
         Node aux = this.first;
         int index = 0;
 
         for (int i = 0; i < this.size; i++){
-            if (aux.getData().equals(unit)){
+            if ((aux).equals(unit)){
                 index = i;
-                break;
             }
             aux = aux.getNext();
         }
 
         return index;
-    }
-
-    @SuppressWarnings({ "rawtypes"})
-    public Node getMemory(T unit){
-        Node aux = this.first;
-
-        for (int i = 0; i < this.size; i++){
-            if (aux.getData().equals(unit)){
-                break;
-            }
-            aux = aux.getNext();
-        }
-
-        return aux;
     }
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -215,7 +188,7 @@ public class SortedPointers<T extends Comparable<T>> {
 
         return null;
     }
-
+    
     public void clear(){
         //this.first.setNext(null);
         //this.first.setPrevious(null);
@@ -229,21 +202,26 @@ public class SortedPointers<T extends Comparable<T>> {
     }
 
     @SuppressWarnings("rawtypes")
-    public void print(){
+    public String print(){
 
         Node aux = this.first;
+        String show = "";
 
-        System.out.print("[");
+        //System.out.print("[");
 
         for (int i = 0; i < this.size; i++){
             if (i == this.size - 1){
-                System.out.print(aux.getData());
+                //System.out.print(aux.getData());
+                show = show + aux.getData();
             }
             else{
-                System.out.print(aux.getData() + ", ");
+                //System.out.print(aux.getData() + " -> ");
+                show = show + (aux.getData() + " -> ");
             }
             aux = aux.getNext();
         }
-        System.out.println("]");
+        show = show + " -> \\\n";
+        //System.out.println(" -> \\");
+        return show;
     }
 }
