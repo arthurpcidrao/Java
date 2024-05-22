@@ -19,6 +19,7 @@ public class Main {
             for (int i = 0; i < line.length(); i++){
                 statistic.add((int) line.charAt(i));
             }
+            statistic.add('\n');  // o inteiro do \n é 10
         }
         input.close();
         statistic.showall();
@@ -26,7 +27,7 @@ public class Main {
 
 
         // crio uma fila de prioridade e adiciono as estatísticas à essa fila
-        PriorityQueue<LetterStructure> queue = new PriorityQueue<>();
+        PriorityQueue<LetterStructure> queue = new PriorityQueue<>();  // mudar para a queue receber tree
 
         for (int i = 0; i < statistic.size(); i++){
             if (statistic.getData(i) != null){
@@ -35,7 +36,7 @@ public class Main {
         }
         queue.print();
 
-        
+
 
         // agora eu preciso transformar essa fila de prioridade em uma ávore
         
