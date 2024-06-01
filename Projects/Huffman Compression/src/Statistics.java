@@ -3,9 +3,11 @@
 public class Statistics {
     
     private LetterStructure array[];
+    private int qtd;
 
     public Statistics(){
         this.array = new LetterStructure[256];
+        this.qtd = 0;
     }
 
     public int size(){
@@ -15,8 +17,13 @@ public class Statistics {
     public void add(int index){
         if (this.array[index] == null){
             this.array[index] = new LetterStructure((char) index);
+            this.qtd++;
         }
         this.array[index].setQtd();
+    }
+
+    public int getHowMany(){
+        return this.qtd;
     }
 
     public int getStatistic(int index){

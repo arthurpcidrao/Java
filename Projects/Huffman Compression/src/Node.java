@@ -8,18 +8,33 @@ public class Node<T> {
     @SuppressWarnings("rawtypes")
     private Node previous;
 
+    
+    
+    @SuppressWarnings("rawtypes")
+    private Node rightSon;
+
+    @SuppressWarnings("rawtypes")
+    private Node leftSon;
+
 
 
     public Node(T data){
+        
         this.data = data;
         this.next = null;
         this.previous = null;
+
+        this.rightSon = null;
+        this.leftSon = null;
     }
 
     public Node(){
         this.data = null;
         this.next = null;
         this.previous = null;
+
+        this.rightSon = null;
+        this.leftSon = null;
     }
 
     public T getData(){
@@ -49,4 +64,28 @@ public class Node<T> {
     public void setPrevious(Node previous){
         this.previous = previous;
     }
+
+
+
+
+    @SuppressWarnings("rawtypes")
+    public Node getRightSon(){
+        return this.rightSon;
+    }
+    
+    @SuppressWarnings("rawtypes")
+    public void setRightSon(Node rightSon){
+        this.rightSon = rightSon;
+    }
+
+    @SuppressWarnings("rawtypes")
+    public Node getLeftSon(){
+        return this.leftSon;
+    }
+
+    @SuppressWarnings("rawtypes")
+    public void setLeftSon(Node leftSon){
+        this.leftSon = leftSon;
+    }
+
 }

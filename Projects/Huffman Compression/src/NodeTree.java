@@ -8,7 +8,7 @@ public class NodeTree<T> {
     @SuppressWarnings("rawtypes")
     private NodeTree leftSon;
 
-
+    
     
     public NodeTree(T data){
         this.data = data;

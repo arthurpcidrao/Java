@@ -6,6 +6,7 @@ public class PriorityQueue<T extends Comparable<T>> {
     @SuppressWarnings("rawtypes")
     private Node last = null;
 
+
     private int size;
     private LetterStructure structure;
 
@@ -48,6 +49,51 @@ public class PriorityQueue<T extends Comparable<T>> {
             // conectando a segunda parte da lista ao novo elemento
             aux.setPrevious(newNode);
         }
+
+        this.size++;
+    }
+
+
+
+
+    @SuppressWarnings({ "rawtypes", "unchecked"})
+    public void enqueue(T unit, Node leftSon, Node rightSon){
+        Node newNode = new Node<>(unit);
+
+        if (this.last == null){
+            this.first = newNode;
+            this.last = newNode;
+        }
+        else if (((T)newNode.getData()).compareTo((T)this.first.getData()) < 0){
+            newNode.setNext(this.first);
+            this.first.setPrevious(newNode);
+            this.first = newNode;
+        }
+        else if (((T)newNode.getData()).compareTo((T)this.last.getData()) >= 0){
+            this.last.setNext(newNode);
+            newNode.setPrevious(this.last);
+            this.last = newNode;
+        }
+        else{
+            Node aux = this.first;
+            while(((T)newNode.getData()).compareTo((T)aux.getData()) >= 0){
+                aux = aux.getNext();
+            }
+            // conectando o novo elemento ao conjunto
+            newNode.setPrevious(aux.getPrevious());
+            newNode.setNext(aux);
+
+            // conectando a primeira parte da lista ao novo elemento
+            aux.getPrevious().setNext(newNode);
+
+            // conectando a segunda parte da lista ao novo elemento
+            aux.setPrevious(newNode);
+        }
+
+        newNode.setLeftSon(leftSon);
+        newNode.setRightSon(rightSon);
+
+        //System.out.println(((LetterStructure) newNode.getData()).getQtd());
 
         this.size++;
     }
@@ -125,23 +171,42 @@ public class PriorityQueue<T extends Comparable<T>> {
         return (T) this.first.getData();
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
-    public T dequeue(){
+    @SuppressWarnings({ "rawtypes" })
+    public Node dequeue(){
         if (this.first != null){
-            Object aux;
+            Node aux;
             if (this.size == 1){
-                aux = (Comparable) this.first.getData();
+                aux = this.first;
                 clear();
             }
             else{
-                aux = (Comparable) this.first.getData();
+                aux = this.first;
                 this.first = this.first.getNext();
                 this.size--;
             }
-            return (T) aux;
+            return aux;
         }
         return null;
     }
+
+
+    // @SuppressWarnings({ "unchecked", "rawtypes" })
+    // public T dequeue(){
+    //     if (this.first != null){
+    //         Object aux;
+    //         if (this.size == 1){
+    //             aux = (Comparable) this.first.getData();
+    //             clear();
+    //         }
+    //         else{
+    //             aux = (Comparable) this.first.getData();
+    //             this.first = this.first.getNext();
+    //             this.size--;
+    //         }
+    //         return (T) aux;
+    //     }
+    //     return null;
+    // }
 
     public void clear(){
         this.first = null;
@@ -170,4 +235,5 @@ public class PriorityQueue<T extends Comparable<T>> {
         }
         System.out.println("]");
     }
+
 }
