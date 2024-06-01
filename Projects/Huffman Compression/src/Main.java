@@ -19,7 +19,7 @@ public class Main {
         String line;
 
         while((line = reader.readLine()) != null){
-            line = line + "\n";
+            //line = line + "\n";
             for (int i = 0; i < line.length(); i++){
                 statistic.add((int) line.charAt(i));
             }
@@ -61,6 +61,22 @@ public class Main {
         huffman.PreOrder();
 
         huffman.showNewFormationLetters();
+
+        huffman.writeDocument();
+        huffman.showDocument();
+
+        BufferedReader rereader = new BufferedReader(new InputStreamReader( new FileInputStream(arquivo),StandardCharsets.UTF_8));
+
+        while((line = rereader.readLine()) != null){
+            System.out.println("oi");
+            //line = line + "\n";
+            for (int i = 0; i < line.length(); i++){
+                huffman.appendDocument(line.charAt(i));
+            }
+        }
+        rereader.close();
+        
+        huffman.showDocument();
 
     }
 }

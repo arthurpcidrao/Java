@@ -4,12 +4,16 @@ public class Compress {
     private Node root;
 
     @SuppressWarnings("unused")
-    private int count = 0;
+    private int layer = 0;
 
     private String binary = "";
     private String binaryLetters[];
 
     private String formattedAlphabet[];
+
+    private String documentString = "";
+
+
 
     @SuppressWarnings("rawtypes")
     public Compress(Node root){
@@ -52,29 +56,22 @@ public class Compress {
 
 
     public void PreOrder(){
-        this.count = 0;
+        this.layer = 0;
         this.binary = "";
         PreOrder(this.root);
     }
-
 
     @SuppressWarnings("rawtypes")
     private void PreOrder(Node root){
 
         if (((LetterStructure) root.getData()).getChar() != null){
-            
-            // System.out.print(((LetterStructure) root.getData()).getChar() + ": ");
 
             binaryLetters[((LetterStructure) root.getData()).getChar()] = this.binary;
-            
-            // System.out.println(this.binary);
         }
-
-        // System.out.print(((LetterStructure) root.getData()).getQtd() + " ");
 
         if (root.getLeftSon() != null){
             this.binary = this.binary + "0";
-            this.count++;
+            this.layer++;
             
             PreOrder(root.getLeftSon());
 
@@ -83,12 +80,54 @@ public class Compress {
 
         if (root.getRightSon() != null){
             this.binary = this.binary + "1";
-            this.count++;
+            this.layer++;
 
             PreOrder(root.getRightSon());
 
             this.binary = this.binary.substring(0, this.binary.length() - 1);
         }
+    }
+
+
+
+    public void cleanDocumentString(){
+        this.documentString = "";
+    }
+
+    public void appendDocument(char charactere){
+        this.documentString += binaryLetters[charactere] + " ";
+    }
+
+
+    public void writeDocument(){
+        writeDocument(this.root);
+
+    }
+
+    @SuppressWarnings("rawtypes")
+    private void writeDocument(Node root){
+
+        if (((LetterStructure) root.getData()).getChar() != null){
+            this.documentString += "1 ";
+            this.documentString += this.formattedAlphabet[((LetterStructure) root.getData()).getChar()] + " ";
+        }
+
+        if (root.getLeftSon() != null || root.getRightSon() != null){
+            this.documentString += "0";
+            
+            if (root.getLeftSon() != null){
+                writeDocument(root.getLeftSon());
+            }
+    
+            if (root.getRightSon() != null){
+                writeDocument(root.getRightSon());
+            }
+        }
+    }
+
+
+    public void showDocument(){
+        System.out.println(this.documentString);
     }
 
     

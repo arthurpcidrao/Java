@@ -1,4 +1,1 @@
-Para converter um valor inteiro para um caractere usando a tabela ASCII em Java, você pode 
-simplesmente fazer um cast do valor inteiro para o tipo char. A tabela ASCII mapeia números
-inteiros a caracteres, e esse cast converte o inteiro para o caractere correspondente na tabela ASCII.
-Aqui está um exemplo simples que demonstra como fazer essa conversão.
+ESTRUTURA
