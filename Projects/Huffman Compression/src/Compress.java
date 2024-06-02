@@ -30,6 +30,12 @@ public class Compress {
 
     }
 
+    @SuppressWarnings("rawtypes")
+    public Node root(){
+        return this.root;
+    }
+
+
     public void showAlphabet(){
         for (int i = 0; i < 256; i++){
             System.out.println(formattedAlphabet[i]);
@@ -95,21 +101,25 @@ public class Compress {
     }
 
     public void appendDocument(char charactere){
-        this.documentString += binaryLetters[charactere] + " ";
+        this.documentString += binaryLetters[charactere];
     }
-
 
     public void writeDocument(){
         writeDocument(this.root);
-
     }
+
+    public String getDocument(){
+        return this.documentString;
+    }
+
+
 
     @SuppressWarnings("rawtypes")
     private void writeDocument(Node root){
 
         if (((LetterStructure) root.getData()).getChar() != null){
-            this.documentString += "1 ";
-            this.documentString += this.formattedAlphabet[((LetterStructure) root.getData()).getChar()] + " ";
+            this.documentString += "1";
+            this.documentString += this.formattedAlphabet[((LetterStructure) root.getData()).getChar()];
         }
 
         if (root.getLeftSon() != null || root.getRightSon() != null){

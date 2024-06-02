@@ -3,10 +3,14 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 
 public class Main {
 
     public static File arquivo = new File("C:\\Users\\arthu\\OneDrive\\Área de Trabalho\\Codes\\Java\\Projects\\Huffman Compression\\src\\arquivoTexto.txt");
+    public static File compressFile = new File("C:\\Users\\arthu\\OneDrive\\Área de Trabalho\\Codes\\Java\\Projects\\Huffman Compression\\src\\comprimido.txt");
+    public static File decompressFile = new File("C:\\Users\\arthu\\OneDrive\\Área de Trabalho\\Codes\\Java\\Projects\\Huffman Compression\\src\\descomprimido.txt");
     
     @SuppressWarnings("rawtypes")
     public static void main(String[] args) throws Exception {
@@ -19,7 +23,7 @@ public class Main {
         String line;
 
         while((line = reader.readLine()) != null){
-            //line = line + "\n";
+            line = line + "\n";
             for (int i = 0; i < line.length(); i++){
                 statistic.add((int) line.charAt(i));
             }
@@ -57,26 +61,50 @@ public class Main {
         Compress huffman = new Compress(queue.dequeue());
 
         huffman.setQtdLetters(256);
-
         huffman.PreOrder();
-
         huffman.showNewFormationLetters();
+
+
 
         huffman.writeDocument();
         huffman.showDocument();
 
+        System.out.println();
+
         BufferedReader rereader = new BufferedReader(new InputStreamReader( new FileInputStream(arquivo),StandardCharsets.UTF_8));
 
         while((line = rereader.readLine()) != null){
-            System.out.println("oi");
-            //line = line + "\n";
+            line = line + "\n";
             for (int i = 0; i < line.length(); i++){
                 huffman.appendDocument(line.charAt(i));
             }
         }
         rereader.close();
-        
+
         huffman.showDocument();
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(compressFile))) {
+            writer.write(huffman.getDocument());
+        }
+
+        Decompress<LetterStructure> decompress = new Decompress<>();
+
+        decompress.setDecompressFile(decompressFile);
+
+        BufferedReader recreateFile = new BufferedReader(new InputStreamReader( new FileInputStream(compressFile),StandardCharsets.UTF_8));
+
+        while((line = recreateFile.readLine()) != null){
+            for (int i = 0; i < line.length(); i++){
+                
+                if (line.charAt(i) == 0){
+                }
+                else {  // ou seja, 1
+
+                }
+                
+            }
+        }
+        recreateFile.close();
 
     }
 }
