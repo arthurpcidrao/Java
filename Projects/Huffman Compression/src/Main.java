@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.io.BufferedWriter;
@@ -8,17 +9,22 @@ import java.io.FileWriter;
 
 public class Main {
 
-    public static File arquivo = new File("C:\\Users\\arthu\\OneDrive\\Área de Trabalho\\Codes\\Java\\Projects\\Huffman Compression\\src\\arquivoTexto.txt");
+    public static File file = new File("C:\\Users\\arthu\\OneDrive\\Área de Trabalho\\Codes\\Java\\Projects\\Huffman Compression\\src\\arquivoTexto.txt");
     public static File compressFile = new File("C:\\Users\\arthu\\OneDrive\\Área de Trabalho\\Codes\\Java\\Projects\\Huffman Compression\\src\\comprimido.txt");
     public static File decompressFile = new File("C:\\Users\\arthu\\OneDrive\\Área de Trabalho\\Codes\\Java\\Projects\\Huffman Compression\\src\\descomprimido.txt");
+
+    static String binary = "";
+    static int index = 0;
     
     @SuppressWarnings("rawtypes")
     public static void main(String[] args) throws Exception {
 
-        // leio o arquivo de texto
-        BufferedReader reader = new BufferedReader(new InputStreamReader( new FileInputStream(arquivo),StandardCharsets.UTF_8));
+        // lê file de texto
+        BufferedReader reader = new BufferedReader(new InputStreamReader( new FileInputStream(file),StandardCharsets.UTF_8));
 
-        // leio linha por linha e pego cada "char" e coloco nas estatísticas
+
+
+        // lê linha e cria estatística
         Statistics statistic = new Statistics();
         String line;
 
@@ -33,7 +39,7 @@ public class Main {
 
 
 
-        // crio uma fila de prioridade e adiciono as estatísticas à essa fila
+        // fila de prioridade com prioridade qtd>char
         PriorityQueue<LetterStructure> queue = new PriorityQueue<>();
 
         for (int i = 0; i < statistic.size(); i++){
@@ -66,12 +72,16 @@ public class Main {
 
 
 
+        //escreve documento com caracteres novos (no terminal)
         huffman.writeDocument();
         huffman.showDocument();
 
         System.out.println();
 
-        BufferedReader rereader = new BufferedReader(new InputStreamReader( new FileInputStream(arquivo),StandardCharsets.UTF_8));
+
+
+        // re lê o file e monta binário
+        BufferedReader rereader = new BufferedReader(new InputStreamReader( new FileInputStream(file),StandardCharsets.UTF_8));
 
         while((line = rereader.readLine()) != null){
             line = line + "\n";
@@ -83,6 +93,9 @@ public class Main {
 
         huffman.showDocument();
 
+
+
+        // cria documento de compressão
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(compressFile))) {
             writer.write(huffman.getDocument());
         }
@@ -91,20 +104,33 @@ public class Main {
 
         decompress.setDecompressFile(decompressFile);
 
-        BufferedReader recreateFile = new BufferedReader(new InputStreamReader( new FileInputStream(compressFile),StandardCharsets.UTF_8));
+        System.out.println();
+        System.out.println();
 
-        while((line = recreateFile.readLine()) != null){
-            for (int i = 0; i < line.length(); i++){
-                
-                if (line.charAt(i) == 0){
-                }
-                else {  // ou seja, 1
 
-                }
-                
+
+        //descompressão através do file comprimido
+        try (FileReader recreateFile = new FileReader(compressFile)) {
+            
+            int character;
+            while ((character = recreateFile.read()) != -1) {
+                binary = binary + ((char) character);
             }
+            recreateFile.close();
+
+            int[] indice = {0};
+            Node root = decompress.rebuildTree(binary, indice);
+            String message = binary.substring(indice[0]);
+
+            String finalMessage = decompress.decoMessage(message, root);
+
+            try (BufferedWriter finalWriter = new BufferedWriter(new FileWriter(decompressFile))) {
+                finalWriter.write(finalMessage);
+                finalWriter.close();
+            }
+
+            //decompress.showPreOrder(root);
         }
-        recreateFile.close();
 
     }
 }

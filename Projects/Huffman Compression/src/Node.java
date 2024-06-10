@@ -37,6 +37,15 @@ public class Node<T> {
         this.leftSon = null;
     }
 
+    @SuppressWarnings("rawtypes")
+    public Node(Node leftSon, Node rightSon){
+        this.leftSon = leftSon;
+        this.rightSon = rightSon;
+        this.data = null;
+        this.next = null;
+        this.previous = null;
+    }
+
     public T getData(){
         return this.data;
     }

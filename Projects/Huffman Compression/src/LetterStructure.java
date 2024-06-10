@@ -19,6 +19,15 @@ public class LetterStructure implements Comparable<LetterStructure> {
         return this.charactere;
     }
 
+    public void setChar(Character character){
+        this.charactere = character;
+    }
+
+    public Character getBinaryChar(String binary){
+        int charCode = Integer.parseInt(binary, 2);  // base string em número de base 2
+        return (char) charCode;
+    }
+
     public void setQtd(){
         this.qtd++;
     }
