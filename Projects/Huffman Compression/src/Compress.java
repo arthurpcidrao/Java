@@ -30,6 +30,18 @@ public class Compress {
 
     }
 
+    public Compress(){
+        this.formattedAlphabet = new String[256];
+
+        String alphabet = "";
+
+        for (int i = 0; i < 256; i++){
+            alphabet = "";
+            alphabet = Integer.toBinaryString(i);
+            formattedAlphabet[i] = String.format("%8s", alphabet).replace(' ', '0');
+        }
+    }
+
     @SuppressWarnings("rawtypes")
     public Node root(){
         return this.root;
@@ -40,6 +52,10 @@ public class Compress {
         for (int i = 0; i < 256; i++){
             System.out.println(formattedAlphabet[i]);
         }
+    }
+
+    public String changeLetterToByte(char letter){
+        return formattedAlphabet[(int) letter] = String.format("%8s", Integer.toBinaryString((int) letter)).replace(' ', '0');
     }
 
 
